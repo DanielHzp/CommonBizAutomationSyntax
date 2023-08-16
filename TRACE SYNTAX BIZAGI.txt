@@ -1,5 +1,7 @@
 
 
+
+//NEW TEXT ADDED
 // Name the trace txt file :
 
 var traceName = "Office Supplies "+Me.Case.CaseNumber;  
