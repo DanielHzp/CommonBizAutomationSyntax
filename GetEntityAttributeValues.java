@@ -21,3 +21,4 @@ var AttributeValuetoObtain=CustomMe.getXPath("")
 
 //Method to obtain the value of an attribute of an entity in business rules or process level expressions
 
+g
