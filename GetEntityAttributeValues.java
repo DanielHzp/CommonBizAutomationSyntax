@@ -17,7 +17,7 @@ var AttributeValuetoObtain=Me.Context.getXPath("mMasterEntityName.Attribute");
 
 var CustomMe=<mMasterEntityName.kmForeignKey>;
 
-var AttributeValuetoObtain=CustomMe.getXPath("")
+var AttributeValuetoObtain=CustomMe.getXPath("ForeignEntityAttribute");
 
 //Method to obtain the value of an attribute of an entity in business rules or process level expressions
 
