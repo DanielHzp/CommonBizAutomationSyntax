@@ -26,3 +26,8 @@ var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(
 
 var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","iIntegerAttribute = " + iIntegerVariable );
 
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","bBooleanAttribute = 1"  );
+
+//Filter with more than one attribue
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute = 1"  );
+
