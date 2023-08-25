@@ -22,12 +22,19 @@ var AttributeValuetoObtain=CustomMe.getXPath("ForeignEntityAttributeName");
 
 //CHelper Method to obtain a SPECIFIC value of an attribute of an entity in business rules or process level expressions
 // It can fetch data from any type of entity (System, parametric or master)
-var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","sStringAttribute = '" + sStringVariable + "'");
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","sStringAttributeName = '" + sStringVariable + "'");
 
-var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","iIntegerAttribute = " + iIntegerVariable );
+//Using a constant string value in the filter
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)"," sStringAttributeName = '1' ");
 
-var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","bBooleanAttribute = 1"  );
+
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","iIntegerAttributeName = " + iIntegerVariable );
+
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","bBooleanAttributeName = 1"  );
 
 //Filter with more than one attribue
-var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute = 1"  );
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute = 1 "  );
+
+//Or
+var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute =   true "  );
 
