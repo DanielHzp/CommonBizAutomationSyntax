@@ -5,7 +5,7 @@
 var vocabularyValue=CHelper.resolveVocabulary( Me , "vocabularyName");
 
 
-//The uncontextualized waty to obtain a vocabulary values thats administered from the work portal 
+//Uncontextualized way to obtain a vocabulary values thats administered from the work portal 
 //Global level invoke
 var contractNotifDays=CHelper.resolveVocabulary( null , "vocabularyName");
 
