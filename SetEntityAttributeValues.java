@@ -51,14 +51,15 @@ var  masterEntityId = <mMasterEntity1Name>;
 
 
 //Subprocess entity context
-var idParentProcessEntity = <mARSValidationsRO.xRecommendations[1].mARSAzureRightSizing>;
+var idParentProcessEntity = <mARSValidationsRO.xCollectionName[ 1 ].mARSAzureRightSizing>;
 
-<mARSValidationsRO.kmAzureRightSizing> = idARS;
+<mARSValidationsRO.kmAzureRightSizing> = idParentProcessEntity;
+
 
 
 var idParentProcessEntity = <Officesuppliesreview.OfficeSuppliesAssets[1].OfficeSupplies>;
 
-<Officesuppliesreview.kmOfficeSupplies> = idOS;
+<Officesuppliesreview.kmOfficeSupplies> = idParentProcessEntity;
 
 
 
