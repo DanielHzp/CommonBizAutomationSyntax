@@ -35,11 +35,36 @@ var processEntityPrimaryKeyd=<mEntityName>;
 
 
 
-//Initialize a foreing key relationship between 2 master entities
+//Initialize a foreing key relationship between 2 master entities (  Entity 2 --> mMasterEntity1Name)
 //kmForeingKeyProcessEntity is the relationship key between  Entity 2 and mProcessEntityName
-var processEntityId = <mEntityName>;
+var  masterEntityId = <mMasterEntity1Name>;
 
-<mProcessEntityName.kmForeingKeyEntity2.kmForeingKeyProcessEntity> =  processEntityId;
+<mMasterEntity1Name.kmForeingKeyEntity2.kmForeingKeyEntity1> =  masterEntityId;
+
+
+
+//Initialize the process entity of a subprocess 
+//Manually assigns the foreing key between a subprocess process entity and the parent process entity
+//Parent process entity context
+<mParentProcessEntity.kmForeingKeytoSubprocessEntity.kmParentProcessEntity> = <mParentProcessEntity>;
+<mAGAzureIntegrations> = <mABC.kmAzureIntegrations>;
+
+
+//Subprocess entity context
+var idParentProcessEntity = <mARSValidationsRO.xRecommendations[1].mARSAzureRightSizing>;
+
+<mARSValidationsRO.kmAzureRightSizing> = idARS;
+
+
+var idParentProcessEntity = <Officesuppliesreview.OfficeSuppliesAssets[1].OfficeSupplies>;
+
+<Officesuppliesreview.kmOfficeSupplies> = idOS;
+
+
+
+
+
+
 
 
 
