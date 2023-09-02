@@ -1,6 +1,11 @@
 
 //Ways to assign values to master entity attributes in business rules at process or entity level
 
+
+//Assign a value to an attribute in mEntity, depends on xpath context navigation (process or entity level)
+<mProcessEntityName.kmForeignKeytoEntity2.attributeName> = valueToAssign;
+
+
 //Assign a value to an attribute in mEntity, depends on expression context (process or entity level)
 //Attribute value remains in the current scope, doesen't PERSIST in the database
 Me.setXPath( "mEntityName.attributeName", valueToAssign);
@@ -35,48 +40,21 @@ var processEntityPrimaryKeyd=<mEntityName>;
 
 
 
-//Initialize a foreing key relationship between 2 master entities (  Entity 2 --> mMasterEntity1Name)
-//kmForeingKeyProcessEntity is the relationship key between  Entity 2 and mProcessEntityName
-var  masterEntityId = <mMasterEntity1Name>;
-
-<mMasterEntity1Name.kmForeingKeyEntity2.kmForeingKeyEntity1> =  masterEntityId;
-
-
-
-//Initialize the process entity of a subprocess 
-//Manually assigns the foreing key between a subprocess process entity and the parent process entity
-//Parent process entity context
-<mParentProcessEntity.kmForeingKeytoSubprocessEntity.kmParentProcessEntity> = <mParentProcessEntity>;
-<mAGAzureIntegrations> = <mABC.kmAzureIntegrations>;
-
-
-//Subprocess entity context
-var idParentProcessEntity = <mARSValidationsRO.xCollectionName[ 1 ].mARSAzureRightSizing>;
-
-<mARSValidationsRO.kmAzureRightSizing> = idParentProcessEntity;
-
-
-
-var idParentProcessEntity = <Officesuppliesreview.OfficeSuppliesAssets[1].OfficeSupplies>;
-
-<Officesuppliesreview.kmOfficeSupplies> = idParentProcessEntity;
-
-
-
-
-
-
-
-
-
-
 //Clean data value of  a master entity attribute
 <mEntity1Name.kmForeingKeyEntity2.kmForeingKeyEntity3.attributeNameinEntity3> = null;
+
+
+//Cleans an attribute value of ALL RECORDS of a filtered collection  (two nested collections sample)
+<mEntity1Name.xCollection1Name[bBooleanAttribute1 = true AND bBooleanAttribute2 = true].xCollection2Name[bBooleanAttribute3 == false].attributeToCleanName> = null;
+
+<mEntity1Name.xCollection1Name[bBooleanAttribute1 = true AND bBooleanAttribute2 = true AND bBooleanAttribute3 != true].attributeToCleanName> = null;
+
 
 
 
 //Clean value of a parameter entity relationship (clean dropdown list selected value)
 <mEntityName.kpForeingKeyParameterEntity> = null;
+
 
 
 
@@ -88,9 +66,11 @@ var idParentProcessEntity = <Officesuppliesreview.OfficeSuppliesAssets[1].Office
 
 
 
+
 //Set value to TWO NESTED PARAMETER ENTITIES at the same time (two nested dropdown lists )
 //ParameterEntityL2  has a relationship to ParameterEntityL1  (kpParameterEntityL2)
 <PurchaseRequisition.kpParameterEntityL2>= CHelper.getEntityAttrib("ParameterEntityL2Name","idParameterEntityL2Name", "stringCode = 'InsertCodeValue' ");
+
 
 
 
