@@ -20,6 +20,39 @@ var collectionArraySize=collectionArray.size();
 var collectionArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollection1Name[bBooleanAttribute = true].xCollection2Name[kmForeignKeytoEntity.integerAttrib = "+filter+" AND kpForeignKeyParamEntity.integerAttrib = 2 ]"));
 
 
+
+//CHelper methods iterating syntax:
+for(var i=0; i<collectionArray.size(); i++)
+{
+	//Obtain primary key of i-th entity record
+	
+	
+	//Obtain attribute of i-th entity record 
+	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //CEntityManager methods to create collection arrays
 //Obtain data from database without context reference 
 
