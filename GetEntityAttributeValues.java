@@ -6,7 +6,7 @@ var AttributeValuetoObtain=<mMasterEntityName.Attribute>;
 
 //Obtain attribute value using contextualized XPath method
 //Me object refers to the business rule context/scope (Process or entity level)
-var AttributeValuetoObtain=Me.getXPath("mMasterEntityName.AttributeName");
+var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");
 
 //Obtain attribute value when XPath doesen´t start from process entity (always use it inside collection form rules)
 var AttributeValuetoObtain=Me.Context.getXPath("mMasterEntityName.AttributeName");
@@ -38,3 +38,10 @@ var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(
 //Or
 var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute =   true "  );
 
+
+
+// if Conditional syntax in Bizagi    -  || ,  &&  , < , >, == , !=
+//XPath navigation depends on business rule/expression context
+if( <mProcessEntityName.kpForeignKeyParamEntity.sStringAttributeName>== 'sStringValue'){
+	
+}

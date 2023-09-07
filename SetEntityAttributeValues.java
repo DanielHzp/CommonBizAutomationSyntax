@@ -44,7 +44,7 @@ CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,null);
 
 
 //Obtain and save the PRIMARY KEY of a process/transactional master entity
-var processEntityPrimaryKeyd=<mEntityName>;
+var processEntityPrimaryKeyd=<mEntityName>;    //Primary key of the case
 
 
 
@@ -61,6 +61,10 @@ var processEntityPrimaryKeyd=<mEntityName>;
 
 //Sets an attribute value of ALL RECORDS of a filtered collection :
 <mEntity1Name.xCollection1Name[bBooleanAttribute1 = true].attributeToSetName> = valueToAssign;
+
+<mEntity1Name.xCollection1Name[kpForeignKeyParamEntity.sStringAttribute = 4].attributeToSetName> = true
+
+
 
 
 //Clean value of a parameter entity relationship (clean dropdown list selected value)

@@ -6,7 +6,6 @@
 
 //CHelper methods to create collection arrays 
 //Obtain data from activity scope
-
 var collectionArray=CHelper.GetValueAsCollection(<mProcessEntityName.kmForeignKeytoEntity2.xCollectionName>);  
 var collectionArraySize=collectionArray.size();
 
@@ -29,11 +28,12 @@ for(var i=0; i<collectionArray.size(); i++)
 	
 	
 	//Obtain attribute of i-th entity record 
-	//Method1:
+	
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
 	
-	//Method2:
 	var attributeValueRecord-ith=collectionArray.get(i).getXPath("AttributeName");
+	
+
 	
 
 }
@@ -43,8 +43,22 @@ for(var i=0; i<collectionArray.size(); i++)
 
 
 
-//CEntityManager methods to create collection arrays
-//Obtain data from database without context reference 
+//CEntityManager methods to create collection arrays (parameter ,master and system WF entities)
+//Obtain data from DATABASE without context reference 
+var filter = "sStringAttributeName = 'StringSampleText' ";
+var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "", filter, "");
+
+	//Obtain primary key of i-th entity record
+		var primaryKeyRecord-ith = collectionArray[i].SurrogateKeyValue;
+
+
+
+
+
+
+
+
+
 
 
 
@@ -58,8 +72,8 @@ var collectionArray= Me.getXPath("entity-list('POtemStatus','')");
 
 
 //Static filter syntax entity list
-user = Me.getXPath("entity-list('Invoiceuploaderemail','uploaderrole =\"UK\"')");
-performer = Me.getXPath("entity-list('Wfuser','username =\""+user[0].getXPath("username")+"\"')");
+var collectionFilteredArray = Me.getXPath("entity-list('Invoiceuploaderemail','uploaderrole =\"UK\"')");
+var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+user[0].getXPath("username")+"\"')");
 
 //Dynamic filter syntax entity list
 
@@ -67,11 +81,12 @@ performer = Me.getXPath("entity-list('Wfuser','username =\""+user[0].getXPath("u
 //Me Entity list  array navigation for-loop syntax:
 for(var i=0; i<collectionArray.size(); i++)
 {
-	//Obtain primary key of i-th entity record
-	var attributeValueRecord-ith = Me.getXPath("entity-list('EntityName')")[0];
+	//Ways to obtain primary key of i-th entity record
+	var primaryKeyRecord-ith = Me.getXPath("entity-list('EntityName')")[0];
+	
+	var  primaryKeyRecord-ith = collectionArray[i];
 	
 	//Obtain attribute of i-th entity record 
-	//Method1:
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
 	
 
@@ -89,8 +104,10 @@ for(var i=0; i<collectionArray.size(); i++)
 //XPath navigation to obtain collection arrays
 //Obtain data from activity scope with context Me reference 
 
-var collectionArray =Me.getXPath("PurchaseRequisition.BlanketPOinvoices.SelectedItems[RequestedItem.ItemIndex = "+index+" ].AmountToBePaid")
-
+var collectionArray =Me.getXPath("PurchaseRequisition.BlanketPOinvoices.SelectedItems[RequestedItem.ItemIndex = "+index+" ].AmountToBePaid");
+var collectionArray = <mProcessEntityName.xCollectionName>;
+var collectionArraySize=collectionArray.size();
+var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();
 
 
 
@@ -98,22 +115,21 @@ var collectionArray =Me.getXPath("PurchaseRequisition.BlanketPOinvoices.Selected
 for(var i=0; i<collectionArray.size(); i++)
 {
 	//Obtain primary key of i-th entity record
+	var primaryKeyRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[0];
 	
 	
 	//Obtain attribute of i-th entity record 
-	//Method1:
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
 	
-	//Method2:
-	//CHelper methods iterating syntax:
 	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[0].getXPath("AttributeName");
 	
+	nuevo.setXPath("BuildingC",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].BuildingConectorsPre").toString()+"%")
 	
 	
 	
 	//Obtain data from activity scope with CustomMeExample reference
+	var collectionArrayRecord-ith = collectionArray[i].getXPath("xCollectionNameofRecord-ith");
 	
-
 }
 	
 
