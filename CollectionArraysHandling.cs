@@ -28,25 +28,14 @@ for(var i=0; i<collectionArray.size(); i++)
 	
 	
 	//Obtain attribute of i-th entity record 
-	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName")
+	//Method1:
+	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
+	
+	//Method2:
+	var attributeValueRecord-ith=collectionArray.get(i).getXPath("AttributeName");
+	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
