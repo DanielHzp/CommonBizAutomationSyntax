@@ -13,11 +13,20 @@ Me.setXPath( "mEntityName.attributeName", valueToAssign);
 
 //
 //CustomMe is an object (foreign or primary key) that refers to a context different than the business rule default context (Me)
-//CustomMe lets the method getXPath navigate the data model starting from the foreign entity 
-
+//CustomMe lets the method setXPath navigate the data model starting from the foreign entity 
 var CustomMeExample = Me.newCollectionItem("mEntityName.xEntityCollectionName");
-var valueToAssign="Sample string text"		
+var valueToAssign="Sample string text"	
+	
 CustomMeExample.setXPath("EntityCollectionAttributeName",valueToAssign);
+
+
+//CustomMe as a reference of a Bizagi array example, here we need to set an attribute value of a specific record in an array:
+var ExampleScopeArray= CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName>);
+var valueToAssign=items[i].getXPath("AttributeName");
+
+ExampleScopeArray[i].setXPath("EntityCollectionAttributeName", valueToAssign);
+
+
 
 
 
@@ -50,6 +59,8 @@ var processEntityPrimaryKeyd=<mEntityName>;
 <mEntity1Name.xCollection1Name[bBooleanAttribute1 = true AND bBooleanAttribute2 = true AND bBooleanAttribute3 != true].attributeToCleanName> = null;
 
 
+//Sets an attribute value of ALL RECORDS of a filtered collection :
+<mEntity1Name.xCollection1Name[bBooleanAttribute1 = true].attributeToSetName> = valueToAssign;
 
 
 //Clean value of a parameter entity relationship (clean dropdown list selected value)
