@@ -106,7 +106,7 @@ for(var i=0; i<collectionArray.size(); i++)
 	
 	//Method2:
 	//CHelper methods iterating syntax:
-	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("AttributeName");
+	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[0].getXPath("AttributeName");
 	
 	
 	
