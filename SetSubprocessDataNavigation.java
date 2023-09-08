@@ -38,7 +38,7 @@ var idProcessEntity = CHelper.getEntityAttrib("mParentProcessEntityName","idmPar
 //Set foreign key from subprocess to parent process:
 <mSubprocessEntityName.kmForeingKeytoSubprocessEntity.kmForeingKeytoParentProcessEntity> = idProcessEntity;
 
-
+cm
 
 
 
