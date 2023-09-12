@@ -2,6 +2,14 @@
 
 //Syntax guide to obtain, loop, and manipulate collection arrays in Bizagi business rules
 
+//Delete all records of a collection at scope context
+Me.deleteAllCollectionItems("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName");
+
+//Use .context when xpath doesen´t start navigating from the process entity
+Me.Context.deleteAllCollectionItems("kmForeignKeytoEntity2.xCollectionName");
+
+
+
 
 
 //CHelper methods to create collection arrays 
@@ -43,14 +51,22 @@ for(var i=0; i<collectionArray.size(); i++)
 
 
 
-//CEntityManager methods to create collection arrays (parameter ,master and system WF entities)
-//Obtain data from DATABASE without context reference 
-var filter = "sStringAttributeName = 'StringSampleText' ";
+//CEntityManager methods to create collection arrays (from parameter ,master and system WF entities)
+//Obtain data from DATABASE without context reference  (They compile in global rules or start events )
+//CEntityManager get Entity method can only be filtered by attributes directly related to the searched entity,  attributes in related/connected entities can´t be navigated
+var filterString = "sStringAttributeName = 'StringSampleText' ";
+var filterBoolean="RecurringPurchase ="+true;
+var filterDate="dContractEndDate IS NOT NULL";
+
 var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "", filter, "");
+var collectionArraySize=collectionArray.Length;
 
 	//Obtain primary key of i-th entity record
 		var primaryKeyRecord-ith = collectionArray[i].SurrogateKeyValue;
 
+	//Obtain attribute of i-th entity record 
+
+	var attributeValueRecord-ith=collectionArray[i].Attributes["AttributeName"].Value;
 
 
 
@@ -61,14 +77,9 @@ var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "
 
 
 
-
-
-
-
-
-//Me Entity list methods to create collection arrays
+//Me Entity list methods to create collection arrays (from parameter ,master and system WF entities)
 //Obtain data from database with context Me reference (They don´t compile in global rules or start events )
-var collectionArray= Me.getXPath("entity-list('POtemStatus','')");
+var collectionArray= Me.getXPath("entity-list('EntityName','')");
 
 
 //Static filter syntax entity list
@@ -81,7 +92,7 @@ var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+u
 //Me Entity list  array navigation for-loop syntax:
 for(var i=0; i<collectionArray.size(); i++)
 {
-	//Ways to obtain primary key of i-th entity record
+	//Obtain primary key of i-th entity record
 	var primaryKeyRecord-ith = Me.getXPath("entity-list('EntityName')")[0];
 	
 	var  primaryKeyRecord-ith = collectionArray[i];
