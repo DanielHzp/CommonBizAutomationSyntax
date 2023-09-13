@@ -14,6 +14,12 @@ var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.
 
 Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]);
 
+//Delete repeated record in a filtered collection:
+if(ExampleArray.size()>1)
+{
+	Me.deleteCollectionItem("mProcessEntityName.xCollectionName",ExampleArray[0]);
+}
+
 
 
 //CHelper methods to create collection arrays 
