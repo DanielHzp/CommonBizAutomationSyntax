@@ -9,6 +9,10 @@ Me.deleteAllCollectionItems("mProcessEntityName.kmForeignKeytoEntity2.xCollectio
 Me.Context.deleteAllCollectionItems("kmForeignKeytoEntity2.xCollectionName");
 
 
+//Delete one record specifically, the record that has to be deleted is identified by the primary key
+var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollectionName[iIntegerAttributeName = " + integerFilter+ "]"));
+
+Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]);
 
 
 
