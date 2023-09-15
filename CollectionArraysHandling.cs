@@ -22,6 +22,12 @@ if(ExampleArray.size()>1)
 
 
 
+//Validate if at least one record exists in the collection given a filtered condition
+Me.getXPath("exists(xMGxInvoiceSectionSubs[kpSubscriptionMGxIS.sIdSubscription ='"+ subsMGChildSubsId +"'])");
+var existsSubscription=Me.getXPath("exists(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.sIdSubscription ='"+recordSubscriptionID+"'])");
+
+
+
 //CHelper methods to create collection arrays 
 //Obtain data from activity scope
 var collectionArray=CHelper.GetValueAsCollection(<mProcessEntityName.kmForeignKeytoEntity2.xCollectionName>);  
@@ -67,6 +73,7 @@ for(var i=0; i<collectionArray.size(); i++)
 var filterString = "sStringAttributeName = 'StringSampleText' ";
 var filterBoolean="RecurringPurchase ="+true;
 var filterDate="dContractEndDate IS NOT NULL";
+var filter = "(RenewalCertificationSent <>" + true + " OR RenewalCertificationSent IS NULL) and ExpirationDate > "+ "'" + Today.ToString("yyyy-MM-dd") + "'" +" and ExpirationDate <= " + "'" + CalculateExpirationDate.ToString("yyyy-MM-dd")+ "'";
 
 var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "", filter, "");
 var collectionArraySize=collectionArray.Length;
@@ -94,10 +101,13 @@ var collectionArray= Me.getXPath("entity-list('EntityName','')");
 
 //Static filter syntax entity list
 var collectionFilteredArray = Me.getXPath("entity-list('Invoiceuploaderemail','uploaderrole =\"UK\"')");
-var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+user[0].getXPath("username")+"\"')");
+var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+sStringAttributeName+"\"')");
 
 //Dynamic filter syntax entity list
+var filter="mABCBudgetInfo.dStartDate= "+"\""+startDateString+"\""+" and mABCBudgetInfo.dEndDate= "+"\""+endDateString
+var filterIterated="mABCBudgetInfo.dStartDate= "+"\""+startDateString+"\""+" and mABCBudgetInfo.dEndDate= "+"\""+endDateString+"\""+" and kpSubscription.sIdSubscription= "+"\""+budgetLoadedId+"\""+" and mABCBudgetInfo.kmABC.kpBudgetType.sBudgetCode= "+"\""+budgetSubIteratedBudgetType+"\"";
 
+var allBudgetSubsinEnvironment=Me.getXPath("entity-list('EntityName','"+filter+"')");
 
 //Me Entity list  array navigation for-loop syntax:
 for(var i=0; i<collectionArray.size(); i++)
