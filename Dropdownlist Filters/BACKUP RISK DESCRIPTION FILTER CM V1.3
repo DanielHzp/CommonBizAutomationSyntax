@@ -1,0 +1,123 @@
+var filter;
+
+if( <ProductRelated.ProductCode>=="ASME" || <ProductRelated.ProductCode>=="CSME" || <ProductRelated.ProductCode>=="MSME" || <ProductRelated.ProductCode>=="SCSME")
+{
+	filter="(RiskDescriptionCode='A')";
+}
+
+if(<Activity.ActivityCode>=="AC")
+{
+	if(<ItemsRelated.ItemCode>==16)
+	{
+	filter="(RiskDescriptionCode='N')";
+	}
+	else
+	{
+	filter="(RiskDescriptionCode='C')";
+	}
+}
+if(<Activity.ActivityCode>=="AF")
+{
+	if(<ItemsRelated.ItemCode>==1)
+	{
+	filter="(RiskDescriptionCode='A')";
+	}
+	else
+	{
+	filter="(RiskDescriptionCode='K')";
+	}
+
+}
+if(<Activity.ActivityCode>=="AU")
+{
+	if(<ItemsRelated.ItemCode>==2)
+	{
+	filter="(RiskDescriptionCode='A')";
+	}
+}
+if(<Activity.ActivityCode>=="ARCHC")
+{
+	if(<ItemsRelated.ItemCode>==5)
+	{
+	filter="(RiskDescriptionCode='D')";
+	}
+	if(<ItemsRelated.ItemCode>==6)
+	{
+	filter="(RiskDescriptionCode='E')";
+	}
+	if(<ItemsRelated.ItemCode>==14)
+	{
+	filter="(RiskDescriptionCode='D')";
+	}
+	if(<ItemsRelated.ItemCode>==17)
+	{
+	filter="(RiskDescriptionCode='O')";
+	}
+}
+
+if(<Activity.ActivityCode>=="CB")
+{
+	if(<ItemsRelated.ItemCode>==8)
+	{
+	filter="(RiskDescriptionCode='G')";
+	}
+	if(<ItemsRelated.ItemCode>==9)
+	{
+	filter="(RiskDescriptionCode='H')";
+	}
+	if(<ItemsRelated.ItemCode>==10)
+	{
+	filter="(RiskDescriptionCode='I')";
+	}
+	if(<ItemsRelated.ItemCode>==13)
+	{
+	filter="(RiskDescriptionCode='L')";
+	}
+	if(<ItemsRelated.ItemCode>==15)
+	{
+	filter="(RiskDescriptionCode='M')";
+	}
+}
+if(<Activity.ActivityCode>=="CBNC")
+{
+	filter="(RiskDescriptionCode='M')";
+}
+
+if(<Activity.ActivityCode>=="DF")
+{
+	if(<ItemsRelated.ItemCode>==3)
+	{
+		filter="(RiskDescriptionCode='B')";
+	}
+	else
+	{
+		filter="(RiskDescriptionCode='P')";
+	}
+}
+if(<Activity.ActivityCode>=="SU" && <ItemsRelated.ItemCode>==11)
+{
+	filter="(RiskDescriptionCode='J')";
+}
+
+if(<Activity.ActivityCode>=="TPS" && <ItemsRelated.ItemCode>==19)
+{
+	filter="(RiskDescriptionCode='Q')";
+}
+
+if(<Activity.ActivityCode>=="UM")
+{
+	filter="(RiskDescriptionCode='F')";
+}
+if(<Requester.Roles[roleName = 'SupportEngineer']>==null && <Requester.Roles[roleName = 'ProductManager']>==null && <Requester.Roles[roleName = 'ProductTeamTechLeader']>==null)
+{
+	filter="(RiskDescriptionCode='A')";
+}
+
+if( <ChangeResponsibleDecision.Code>=="EMER")
+{
+	filter="(RiskDescriptionCode='A')";
+}
+
+
+
+filter;

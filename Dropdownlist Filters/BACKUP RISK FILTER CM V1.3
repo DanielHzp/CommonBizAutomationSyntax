@@ -1,0 +1,64 @@
+var filter;
+if(<ProductRelated.ProductCode>=="ASME" || <ProductRelated.ProductCode>=="CSME" || <ProductRelated.ProductCode>=="MSME" || <ProductRelated.ProductCode>=="SCSME")
+	{
+		if(<ChangeResponsibleDecision.Code>== "STD")
+		{
+			filter="(RiskCode='L')";
+		}
+		else
+		{
+			filter="(RiskCode='H')";
+		}
+	}
+
+
+if(<Activity.ActivityCode>=="AC" || <Activity.ActivityCode>=="AU" || <Activity.ActivityCode>=="ARCHC" || <Activity.ActivityCode>=="SU" || <Activity.ActivityCode>=="TPS"|| <Activity.ActivityCode>=="UM")
+{
+	filter="(RiskCode='H')";
+}
+if(<Activity.ActivityCode>=="AF")
+{
+	filter="(RiskCode='L')";
+}
+
+if(<Activity.ActivityCode>=="CBNC")
+{
+	filter="(RiskCode='H')";
+}
+
+if(<Activity.ActivityCode>=="CB")
+{
+	if (<ItemsRelated.ItemCode>==8)
+	{
+	filter="(RiskCode='H')";
+	}
+	else if (<ItemsRelated.ItemCode>==15)
+	{
+	filter="(RiskCode='H')";
+	}
+	else
+	{
+	filter="(RiskCode='L')";
+	}
+}
+if( <Activity.ActivityCode>=="DF")
+{
+	if(<ItemsRelated.ItemCode>==3)
+	{
+	filter="(RiskCode='H')";
+	}
+	else
+	{
+	filter="(RiskCode='L')";
+	}
+
+
+
+}
+
+if(<ProductRelated.ProductCode>=="ITMSP" || <ProductRelated.ProductCode>=="ITND" || <ProductRelated.ProductCode>=="ITNSD" || <ProductRelated.ProductCode>=="ITPAAS" || <ProductRelated.ProductCode>=="ITSA" || <ProductRelated.ProductCode>=="ITSH" || <ProductRelated.ProductCode>=="ITSO")
+{
+	filter="(RiskCode='L')";
+}
+
+filter;

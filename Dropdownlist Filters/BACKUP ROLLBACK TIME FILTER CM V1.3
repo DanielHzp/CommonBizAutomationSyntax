@@ -1,0 +1,60 @@
+var filter;
+
+filter="(TimeinMinutes=0)"
+
+if(<RollbackProcedure.IdCode>==2|| <RollbackProcedure.IdCode>==3 || <RollbackProcedure.IdCode>==22 || (<RollbackProcedure.IdCode>==5 && <Activity.ActivityCode>=="ARCHC"))
+{
+filter="(TimeinMinutes=0)";
+}
+
+if(<RollbackProcedure.IdCode>==6 || <RollbackProcedure.IdCode>==7 || <RollbackProcedure.IdCode>==8 ||(<RollbackProcedure.IdCode>==5 && <Activity.ActivityCode>=="CB")|| <RollbackProcedure.IdCode>==13|| <RollbackProcedure.IdCode>==18|| <RollbackProcedure.IdCode>== 19)
+{
+filter="(TimeinMinutes=10)";
+}
+if(<RollbackProcedure.IdCode>== 17)
+{
+filter="(TimeinMinutes=120)";
+}
+if(<RollbackProcedure.IdCode>==16)
+{
+filter="(TimeinMinutes=15)";
+}
+if(<RollbackProcedure.IdCode>==9 || <RollbackProcedure.IdCode>==10 || <RollbackProcedure.IdCode>==12 || <RollbackProcedure.IdCode>==15)
+{
+filter="(TimeinMinutes=20)";
+}
+if(<RollbackProcedure.IdCode>==1 || <RollbackProcedure.IdCode>==20 || <RollbackProcedure.IdCode>==21)
+{
+filter="(TimeinMinutes=30)";
+}
+if(<RollbackProcedure.IdCode>==11 || <RollbackProcedure.IdCode>==14)
+{
+filter="(TimeinMinutes=60)";
+}
+if(<RollbackProcedure.IdCode>==4)
+{
+filter="(TimeinMinutes=11)";
+}
+if(<RollbackProcedure.IdCode>==4)
+{
+filter="(TimeinMinutes=11)";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+filter;

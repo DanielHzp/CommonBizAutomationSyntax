@@ -1,0 +1,252 @@
+
+var filter;
+
+if(<Requester.Roles[roleName = 'ProductTeamTechLeader']>!=null || <Requester.Roles[roleName = 'ProductManager']>!=null)
+{
+	if( <ChangeResponsibleDecision.Code>=="NORM" || <ChangeResponsibleDecision.Code>=="EMER")
+	{
+	if(<ItemsRelated.ItemCode>==20)
+	{
+		filter="(IdCode=2)";
+	}
+	}
+	else
+	{
+	if(<ItemsRelated.ItemCode>==20)
+	{
+		filter="(IdCode=20)";
+	}
+
+	}
+
+}
+else if( <Requester.Roles[roleName = 'SupportEngineer']>!=null)
+{
+	if( <ChangeResponsibleDecision.Code>=="NORM")
+	{
+		if( <Activity.ActivityCode>=="AU" && <ItemsRelated.ItemCode>==2)
+		{
+		filter="(IdCode=2)";
+		}
+		if(<Activity.ActivityCode>=="AF" && <ItemsRelated.ItemCode>==1)
+		{
+		filter="(IdCode=1)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==5)
+		{
+		filter="(IdCode=5)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==6)
+		{
+		filter="(IdCode=6)";
+		}
+		if(<ProductRelated.ProductCode>=="AS" && <Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==14)
+		{
+		filter="(IdCode=14)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==17)
+		{
+		filter="(IdCode=17)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==8)
+		{
+		filter="(IdCode=9)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==9)
+		{
+		filter="(IdCode=5)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==13)
+		{
+		filter="(IdCode=13)";
+		}
+		if(<ProductRelated.ProductCode>=="AS" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=7)";
+		}
+		if(<ProductRelated.ProductCode>=="CS" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=8)";
+		}
+		if( <ProductRelated.ProductCode>=="CP" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=7)";
+		}
+
+
+	}
+	if(<ChangeResponsibleDecision.Code>=="STD")
+	{
+		if( <Activity.ActivityCode>=="AC" && <ItemsRelated.ItemCode>==4)
+		{
+		filter="(IdCode=4)";
+		}
+		if(<Activity.ActivityCode>=="AC" && <ItemsRelated.ItemCode>==16)
+		{
+		filter="(IdCode=16)";
+		}
+		if(<Activity.ActivityCode>=="AF" && <ItemsRelated.ItemCode>==12)
+		{
+		filter="(IdCode=12)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==10)
+		{
+		filter="(IdCode=10)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==15)
+		{
+		filter="(IdCode=15)";
+		}
+		if(<Activity.ActivityCode>=="CBNC" )
+		{
+		filter="(IdCode=15)";
+		}
+		if(<Activity.ActivityCode>=="DF" && <ItemsRelated.ItemCode>==3)
+		{
+		filter="(IdCode=3)";
+		}
+		if(<Activity.ActivityCode>=="DF" && <ItemsRelated.ItemCode>==18)
+		{
+		filter="(IdCode=18)";
+		}
+		if(<Activity.ActivityCode>=="SU" && <ItemsRelated.ItemCode>==11)
+		{
+		filter="(IdCode=11)";
+		}
+		if(<Activity.ActivityCode>=="TPS" && <ItemsRelated.ItemCode>==19)
+		{
+		filter="(IdCode=19)";
+		}
+	}
+	if(<ChangeResponsibleDecision.Code>=="EMER")
+	{
+		if( <Activity.ActivityCode>=="AU" && <ItemsRelated.ItemCode>==2)
+		{
+		filter="(IdCode=2)";
+		}
+		if(<Activity.ActivityCode>=="AF" && <ItemsRelated.ItemCode>==1)
+		{
+		filter="(IdCode=1)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==5)
+		{
+		filter="(IdCode=5)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==6)
+		{
+		filter="(IdCode=6)";
+		}
+		if(<ProductRelated.ProductCode>=="AS" && <Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==14)
+		{
+		filter="(IdCode=14)";
+		}
+		if(<Activity.ActivityCode>=="ARCHC" && <ItemsRelated.ItemCode>==17)
+		{
+		filter="(IdCode=17)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==8)
+		{
+		filter="(IdCode=9)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==9)
+		{
+		filter="(IdCode=5)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==13)
+		{
+		filter="(IdCode=13)";
+		}
+		if(<ProductRelated.ProductCode>=="AS" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=7)";
+		}
+		if(<ProductRelated.ProductCode>=="CS" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=8)";
+		}
+		if( <ProductRelated.ProductCode>=="CP" && <Activity.ActivityCode>=="UM" && <ItemsRelated.ItemCode>==7)
+		{
+		filter="(IdCode=7)";
+		}
+		if( <Activity.ActivityCode>=="AC" && <ItemsRelated.ItemCode>==4)
+		{
+		filter="(IdCode=4)";
+		}
+		if(<Activity.ActivityCode>=="AC" && <ItemsRelated.ItemCode>==16)
+		{
+		filter="(IdCode=16)";
+		}
+		if(<Activity.ActivityCode>=="AF" && <ItemsRelated.ItemCode>==12)
+		{
+		filter="(IdCode=12)";
+		}
+		if(<Activity.ActivityCode>=="CB" && <ItemsRelated.ItemCode>==10)
+		{
+		filter="(IdCode=10)";
+		}
+		if(<Activity.ActivityCode>=="CBNC" )
+		{
+		filter="(IdCode=15)";
+		}
+		if(<Activity.ActivityCode>=="DF" && <ItemsRelated.ItemCode>==3)
+		{
+		filter="(IdCode=3)";
+		}
+		if(<Activity.ActivityCode>=="DF" && <ItemsRelated.ItemCode>==18)
+		{
+		filter="(IdCode=18)";
+		}
+		if(<Activity.ActivityCode>=="SU" && <ItemsRelated.ItemCode>==11)
+		{
+		filter="(IdCode=11)";
+		}
+		if(<Activity.ActivityCode>=="TPS" && <ItemsRelated.ItemCode>==19)
+		{
+		filter="(IdCode=19)";
+		}
+		else
+		{
+		filter="(IdCode=2)";
+		}
+
+
+
+	}
+
+}
+else
+{
+	//filter="(IdCode=2)";
+	//IT cases
+
+	if(<ChangeResponsibleDecision.Code>=="STD")
+	{
+		if(<Activity.ActivityCode>=="ITSHRC" && <ProductRelated.ProductCode>=="ITSH")
+		{
+			filter="(IdCode=2)";
+		}
+		if(<ProductRelated.ProductCode>=="ITMSP")
+		{
+			filter="(IdCode=22)";
+		}
+		if(<ProductRelated.ProductCode>=="ITPAAS")
+		{
+			filter="(IdCode=5)";
+		}
+		if((<ProductRelated.ProductCode>=="ITSO" && <Activity.ActivityCode>=="ITOSFU") || (<ProductRelated.ProductCode>=="ITSA" && <Activity.ActivityCode>=="ITAFU") || (<ProductRelated.ProductCode>=="ITND" && <Activity.ActivityCode>=="ITNDOFU") || (<ProductRelated.ProductCode>=="ITNSD" && <Activity.ActivityCode>=="ITDOFU"))
+		{
+			filter="(IdCode=1)";
+		}
+		if((<ProductRelated.ProductCode>=="ITSO" && <Activity.ActivityCode>=="ITOSCH") || (<ProductRelated.ProductCode>=="ITSA" && <Activity.ActivityCode>=="ITACH") || (<ProductRelated.ProductCode>=="ITND" && <Activity.ActivityCode>=="ITNDCC") || (<ProductRelated.ProductCode>=="ITNSD" && <Activity.ActivityCode>=="ITDCC")  )
+		{
+			filter="(IdCode=21)";
+		}
+
+
+	}
+
+}
+
+
+
+filter;
