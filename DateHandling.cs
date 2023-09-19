@@ -1,6 +1,4 @@
 
-
-
 //Date handling syntax in busines rules and process expressions 
 
 
@@ -22,17 +20,12 @@ var sYear = dDateAttributeValue.Year;
 
 //Date time object to create a custom date value. Receives date time properties as parameters
 var newCustomDate = new DateTime(sYear, sMonth, sDay, sHour, sMinute, sSecond);
+var newCustomDate = new DateTime(eYear, eMonth, eDay, 16, 59, 00);
 
 
 //Validate if date time value is a working day or not
 if(CHelper.IsWorkingDay(Me,dDateAttributeValue)==true){ ... }
 
-
-//Calculate the time difference between two dates, the result is in MINUTES considering only WORKING  TIME
-var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,EndDateAttribute);
-
-//Convert to days
-var days = minutes / 480;
 
 
 
@@ -46,12 +39,32 @@ var DateResult=dDateAttribute.AddDays(-DaystoAdd); //Substract
 
 
 int HourstoAdd=5;
-var DateResult = dDateAttribute.AddHours(HourstoAdd);
+var DateResult = dDateAttribute.AddHours(HourstoAdd); //Add hours
 
 
 
 
+//Calculate the time difference between two dates, the result is in MINUTES considering only WORKING  TIME
+var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,EndDateAttribute);
+var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,now);
 
+//Convert to WORKING days
+var days = minutes / 480;
+var daysRoundedDown=CHelper.Math.Floor(days);
+
+//Convert to WORKING days
+var differenceDays = (minutes / 60) / 8;
+
+
+// Calculate the date time difference between two dates. the result is in days considering calendar time (includes non working hours)
+var now=DateTime.Now;
+
+var dueDate=now.AddDays(32);
+var difTime=dueDate-now;
+var difTimeDays=difTime.Days;
+
+var dDateAttribute = <mProcessEntityName.dDateAttributeName>;
+var difTime=dDateAttribute-now;
 
 
 
@@ -60,6 +73,11 @@ var DateResult = dDateAttribute.AddHours(HourstoAdd);
 
 // Set timer event  to wait until a specific date
 Me.EstimatedSolutionDate=<mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>;
+
+var dateTimer=<mProcessEntityName.dDateAttributeName>;
+Me.EstimatedSolutionDate=dateTimer;
+
+
 
 
 //Set timer event waiting time in minutes (timer attached events)
@@ -73,18 +91,27 @@ Me.Duration = Customdays * 8 * 60;
 
 
 
+//Methods to CANCEL/CLOSE process instances of events
 
-// Set date difference in days in a timer
+var CaseId = CHelper.getCaseById(Me.Case.Id);
+var workItemsArray = CaseInfo.getCurrentWorkItems();
+for(var i = 0; i<workItemsArray.Count; i++)
+{
+	if(workItems[i].Task.Name == "EventName")
+	{
+		CHelper.setEvent(Me,Me.Case.Id,"EventName",null);
+	}
+	if(workItems[i].Task.Name == "EventName")
+	{
+		CHelper.setEvent(Me,Me.Case.Id,"EventName",null);
+	}
+}
 
-var traceName = "NC test dif times: "+Me.Case.CaseNumber;
-var now=DateTime.Now;
-CHelper.trace(traceName, "now"+now);
-var dueDate=now.AddDays(32);
-CHelper.trace(traceName, "dueDate"+dueDate);
-var difTime=dueDate-now;
-CHelper.trace(traceName, "difTime:"+difTime);
 
-var difTimeDays=difTime.Days;
-CHelper.trace(traceName, "difTimeDays:"+difTimeDays);
+
+
+
+
+
 
 
