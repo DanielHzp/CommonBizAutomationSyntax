@@ -1,0 +1,423 @@
+var traceName = "ABC "+Me.Case.CaseNumber;
+CHelper.trace(traceName, "------------------Set_GraphicalAnalysis------------------------");
+var budgetDetails = CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+var sizeBudgetDetails = budgetDetails.size();
+CHelper.trace(traceName, "sizeBudgetDetails: "+sizeBudgetDetails);
+if (sizeBudgetDetails == 0)
+{
+	//CHelper.ThrowValidationError("Please first load the recommendations grid in order to execute the graphical analysis.");
+	CHelper.ThrowValidationAlert("Please first load the budget in order to execute the graphical analysis.");
+}
+else
+{
+	for (var i=0;i<sizeBudgetDetails;i++)
+	{
+		var record = budgetDetails.get(i);
+		var codeMGParent = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent.sCode");
+		var codeInvoiceSection = record.getXPath("kpSubscription.kpInvoiceSection.sCode");
+		CHelper.trace(traceName, "codeMGParent: "+codeMGParent);
+		CHelper.trace(traceName, "codeInvoiceSection: "+codeInvoiceSection);
+		var existsBudgetMG = Me.getXPath("exists(mABC.kmGraphicalAnalysis.xBudgetXMG[kpMG.sCode ='"+ codeMGParent +"'])");
+		var existsBdgtInvoiceSec=Me.getXPath("exists(mABC.kmGraphicalAnalysis.xBudgetXIS[kpInvoiceSectionXIS.sCode ='"+ codeInvoiceSection +"'])");
+		var bdgtInvoiceSecIsNull=CHelper.IsNull(existsBdgtInvoiceSec);
+
+		CHelper.trace(traceName, "existsBudgetMG: "+existsBudgetMG);
+		CHelper.trace(traceName, "existsBdgtInvoiceSec: "+existsBdgtInvoiceSec);
+		CHelper.trace(traceName, "bdgtInvoiceSecIsNull: "+bdgtInvoiceSecIsNull);
+
+
+		if (!existsBudgetMG)
+		{
+			var idMG = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent");
+			//var idInvoiceSec=record.getXPath("kpSubscription.kpInvoiceSection");
+			//CHelper.trace(traceName, "idInvoiceSec: "+idInvoiceSec);
+			CHelper.trace(traceName, "idMG: "+idMG);
+
+			var newBudgetMG = Me.Context.newCollectionItem("mABC.kmGraphicalAnalysis.xBudgetXMG");
+			newBudgetMG.setXPath("kpMG",idMG);
+			//newBudgetMG.setXPath("kpInvoiceSectionXMG",idInvoiceSec);
+			var totalBudgetMG = Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpManagementGroup.kpMgmtGroupParent.sCode ='"+ codeMGParent +"'].cBudgetAmount)");
+			//var totalBudgetIS= Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = '"+codeInvoiceSection+"'].cBudgetAmount)");
+			CHelper.trace(traceName, "totalBudgetMG: "+totalBudgetMG);
+			//CHelper.trace(traceName, "totalBudgetIS: "+totalBudgetIS);
+			newBudgetMG.setXPath("cBudgetAmount",totalBudgetMG);
+			//newBudgetMG.setXPath("cBudgetAmountInvoiceSect",totalBudgetIS);
+		}
+
+
+
+		if (!existsBdgtInvoiceSec && !bdgtInvoiceSecIsNull )
+		{
+			//var idMG = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent");
+			var totalBudgetIS= Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = '"+codeInvoiceSection+"'].cBudgetAmount)");
+			CHelper.trace(traceName, "totalBudgetIS: "+totalBudgetIS);
+
+			if(totalBudgetIS>0)
+			{
+				var idInvoiceSec=record.getXPath("kpSubscription.kpInvoiceSection");
+				CHelper.trace(traceName, "idInvoiceSec: "+idInvoiceSec);
+				//CHelper.trace(traceName, "idMG: "+idMG);
+
+				// Add invoice sections of subscriptions loaded
+				var newBudgetIS = Me.Context.newCollectionItem("mABC.kmGraphicalAnalysis.xBudgetXIS");
+				newBudgetIS.setXPath("kpInvoiceSectionXIS",idInvoiceSec);
+				newBudgetIS.setXPath("cBudgetAmountIS",totalBudgetIS);
+
+
+				// Add subscriptions to collection of MGc of current invoice section
+
+				//var subsWithCurrentIS=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = "+CodeInvoiceSection+"]>);
+				var subsWithCurrentIS=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+				var	subsWithCurrentISsize=subsWithCurrentIS.size();
+				CHelper.trace(traceName, "subsWithCurrentISsize: "+subsWithCurrentISsize);
+
+
+					for(var j=0;j<subsWithCurrentISsize;j++)
+					{
+					var subsMGIScode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpInvoiceSection.sCode");
+					CHelper.trace(traceName, "subsMGIScode: "+subsMGIScode);
+
+					var subsRecord=subsWithCurrentIS.get(j);
+
+					if(subsMGIScode==codeInvoiceSection)
+					{
+						var subsMGid=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpManagementGroup");
+						CHelper.trace(traceName, "subsMGid: "+subsMGid);
+
+						var subsPurposeid=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpPurpose");
+						CHelper.trace(traceName, "subsPurposeid: "+subsPurposeid);
+
+						var subsMGcode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpManagementGroup.sCode");
+						CHelper.trace(traceName, "subsMGcode: "+subsMGcode);
+
+						var subsPurposeCode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpPurpose.sCode");
+						CHelper.trace(traceName, "subsPurposeCode: "+subsPurposeCode);
+
+						var existsMGc=newBudgetIS.getXPath("exists(xManagementGroupsIS[kpMGxInvoiceSec.sCode ='"+ subsMGcode +"'])");
+						CHelper.trace(traceName, "existsMGc: "+existsMGc);
+
+						var existsPurpose=newBudgetIS.getXPath("exists(xPurposesIS[kpPurposesxInvoiceSec.sCode ='"+ subsPurposeCode +"'])");
+						CHelper.trace(traceName, "existsPurpose: "+existsPurpose);
+
+						/*
+						var MGxIS=newBudgetIS.getXPath("xManagementGroupsIS[kpMGxInvoiceSec.sCode ='"+ subsMGcode +"'])");
+						var MGxISSize=MGxIS.size();
+						CHelper.trace(traceName, "MGxISSize: "+MGxISSize);
+
+						var subsAmount=subsWithCurrentIS.get(j).getXPath("cBudgetAmount");
+						CHelper.trace(traceName, "subsAmount: "+subsAmount);
+						*/
+
+						var MGAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpManagementGroup.sCode = '"+subsMGcode+"'AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+						CHelper.trace(traceName, "totalBudgetIS: "+MGAmount);
+
+						var purposeAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpPurpose.sCode = '"+subsPurposeCode+"'AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+						CHelper.trace(traceName, "purposeAmount: "+purposeAmount);
+
+
+						//Add Management group childs to collection of current invoice section
+						if(!existsMGc && MGAmount>0)
+						{
+						var newMGxIS= newBudgetIS.newCollectionItem("xManagementGroupsIS");
+						newMGxIS.setXPath("kpMGxInvoiceSec",subsMGid);
+						newMGxIS.setXPath("cBudgetAmountxIS",MGAmount);
+						}
+						
+						
+								// Add subscriptions to collection of each MG Child Added
+								
+								var mngGroupChildsAdded=newBudgetIS.getXPath("xManagementGroupsIS");
+								var mngGroupChildsAddedSize=mngGroupChildsAdded.size();
+								CHelper.trace(traceName, "mngGroupChildsAddedSize: "+mngGroupChildsAddedSize);
+								
+								for(var m=0;m<mngGroupChildsAddedSize;m++)
+								{
+									var  =mngGroupChildsAdded.get(m);
+									
+								
+								}
+								
+								
+								// Add Purposes to collection of each MG Child Added
+						
+						
+
+						//Add purposes to collection of current invoice section
+						if(!existsPurpose && purposeAmount>0)
+						{
+						var newMGxIS= newBudgetIS.newCollectionItem("xPurposesIS");
+						newMGxIS.setXPath("kpPurposesxInvoiceSec",subsPurposeid);
+						newMGxIS.setXPath("cBudgetAmountPurposes",purposeAmount);
+						}
+
+
+					}
+
+
+					}
+
+
+			}
+
+
+		}
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+var traceName = "ABC "+Me.Case.CaseNumber;
+CHelper.trace(traceName, "------------------Set_GraphicalAnalysis------------------------");
+var budgetDetails = CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+var sizeBudgetDetails = budgetDetails.size();
+CHelper.trace(traceName, "sizeBudgetDetails: "+sizeBudgetDetails);
+
+Me.deleteAllCollectionItems("mABC.kmGraphicalAnalysis.xBudgetXIS");
+Me.deleteAllCollectionItems("mABC.kmGraphicalAnalysis.xBudgetXMG");
+
+if (sizeBudgetDetails == 0)
+{
+	//CHelper.ThrowValidationError("Please first load the recommendations grid in order to execute the graphical analysis.");
+	CHelper.ThrowValidationAlert("Please first load the budget in order to execute the graphical analysis.");
+}
+else
+{
+	for (var i=0;i<sizeBudgetDetails;i++)
+	{
+		var record = budgetDetails.get(i);
+		var codeMGParent = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent.sCode");
+		var codeInvoiceSection = record.getXPath("kpSubscription.kpInvoiceSection.sCode");
+		CHelper.trace(traceName, "codeMGParent: "+codeMGParent);
+		CHelper.trace(traceName, "codeInvoiceSection: "+codeInvoiceSection);
+		var existsBudgetMG = Me.getXPath("exists(mABC.kmGraphicalAnalysis.xBudgetXMG[kpMG.sCode ='"+ codeMGParent +"'])");
+		var existsBdgtInvoiceSec=Me.getXPath("exists(mABC.kmGraphicalAnalysis.xBudgetXIS[kpInvoiceSectionXIS.sCode ='"+ codeInvoiceSection +"'])");
+		var bdgtInvoiceSecIsNull=CHelper.IsNull(existsBdgtInvoiceSec);
+
+		CHelper.trace(traceName, "existsBudgetMG: "+existsBudgetMG);
+		CHelper.trace(traceName, "existsBdgtInvoiceSec: "+existsBdgtInvoiceSec);
+		CHelper.trace(traceName, "bdgtInvoiceSecIsNull: "+bdgtInvoiceSecIsNull);
+
+
+		if (!existsBudgetMG)
+		{
+			var idMG = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent");
+			//var idInvoiceSec=record.getXPath("kpSubscription.kpInvoiceSection");
+			//CHelper.trace(traceName, "idInvoiceSec: "+idInvoiceSec);
+			CHelper.trace(traceName, "idMG: "+idMG);
+
+			var newBudgetMG = Me.Context.newCollectionItem("mABC.kmGraphicalAnalysis.xBudgetXMG");
+			newBudgetMG.setXPath("kpMG",idMG);
+			//newBudgetMG.setXPath("kpInvoiceSectionXMG",idInvoiceSec);
+			var totalBudgetMG = Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpManagementGroup.kpMgmtGroupParent.sCode ='"+ codeMGParent +"'].cBudgetAmount)");
+			//var totalBudgetIS= Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = '"+codeInvoiceSection+"'].cBudgetAmount)");
+			CHelper.trace(traceName, "totalBudgetMG: "+totalBudgetMG);
+			//CHelper.trace(traceName, "totalBudgetIS: "+totalBudgetIS);
+			newBudgetMG.setXPath("cBudgetAmount",totalBudgetMG);
+			//newBudgetMG.setXPath("cBudgetAmountInvoiceSect",totalBudgetIS);
+		}
+
+
+
+		if (!existsBdgtInvoiceSec && !bdgtInvoiceSecIsNull )
+		{
+			//var idMG = record.getXPath("kpSubscription.kpManagementGroup.kpMgmtGroupParent");
+			var totalBudgetIS= Me.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = '"+codeInvoiceSection+"'].cBudgetAmount)");
+			CHelper.trace(traceName, "totalBudgetIS: "+totalBudgetIS);
+
+			if(totalBudgetIS>0)
+			{
+				var idInvoiceSec=record.getXPath("kpSubscription.kpInvoiceSection");
+				CHelper.trace(traceName, "idInvoiceSec: "+idInvoiceSec);
+				//CHelper.trace(traceName, "idMG: "+idMG);
+
+				// Add invoice sections of subscriptions loaded
+				var newBudgetIS = Me.Context.newCollectionItem("mABC.kmGraphicalAnalysis.xBudgetXIS");
+				newBudgetIS.setXPath("kpInvoiceSectionXIS",idInvoiceSec);
+				newBudgetIS.setXPath("cBudgetAmountIS",totalBudgetIS);
+
+
+				// Add subscriptions to collection of MGc of current invoice section
+
+				//var subsWithCurrentIS=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpInvoiceSection.sCode = "+CodeInvoiceSection+"]>);
+				var subsWithCurrentIS=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+				var	subsWithCurrentISsize=subsWithCurrentIS.size();
+				CHelper.trace(traceName, "subsWithCurrentISsize: "+subsWithCurrentISsize);
+
+
+					for(var j=0;j<subsWithCurrentISsize;j++)
+					{
+					var subsMGIScode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpInvoiceSection.sCode");
+					CHelper.trace(traceName, "subsMGIScode: "+subsMGIScode);
+
+					var subsRecord=subsWithCurrentIS.get(j);
+
+					if(subsMGIScode==codeInvoiceSection)
+					{
+						var subsMGid=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpManagementGroup");
+						CHelper.trace(traceName, "subsMGid: "+subsMGid);
+
+						var subsPurposeid=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpPurpose");
+						CHelper.trace(traceName, "subsPurposeid: "+subsPurposeid);
+
+						var subsMGcode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpManagementGroup.sCode");
+						CHelper.trace(traceName, "subsMGcode: "+subsMGcode);
+
+						var subsPurposeCode=subsWithCurrentIS.get(j).getXPath("kpSubscription.kpPurpose.sCode");
+						CHelper.trace(traceName, "subsPurposeCode: "+subsPurposeCode);
+
+						var existsMGc=newBudgetIS.getXPath("exists(xManagementGroupsIS[kpMGxInvoiceSec.sCode ='"+ subsMGcode +"'])");
+						CHelper.trace(traceName, "existsMGc: "+existsMGc);
+
+						var existsPurpose=newBudgetIS.getXPath("exists(xPurposesIS[kpPurposesxInvoiceSec.sCode ='"+ subsPurposeCode +"'])");
+						CHelper.trace(traceName, "existsPurpose: "+existsPurpose);
+
+					
+
+						var MGAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpManagementGroup.sCode = '"+subsMGcode+"'AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+						CHelper.trace(traceName, "totalBudgetIS: "+MGAmount);
+
+						var purposeAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpPurpose.sCode = '"+subsPurposeCode+"'AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+						CHelper.trace(traceName, "purposeAmount: "+purposeAmount);
+
+
+						//Add Management group childs to collection of current invoice section
+						if(!existsMGc && MGAmount>0)
+						{
+						var newMGxIS= newBudgetIS.newCollectionItem("xManagementGroupsIS");
+						newMGxIS.setXPath("kpMGxInvoiceSec",subsMGid);
+						newMGxIS.setXPath("cBudgetAmountxIS",MGAmount);
+						}
+
+
+								// Add subscriptions to collection of each MG Child Added
+
+
+								//var subscriptionsMGChild=Me.Context.getXPath("mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpManagementGroup.sCode = '"+subsMGcode+"' AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"']");
+								var subscriptionsMGChild=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+								var subscriptionsMGChildSize=subscriptionsMGChild.size();
+								CHelper.trace(traceName, "subscriptionsMGChildSize: "+subscriptionsMGChildSize);
+
+								for(var m=0;m<subscriptionsMGChildSize;m++)
+								{
+									var subsMGChildSubsPK=subscriptionsMGChild.get(m).getXPath("kpSubscription");
+									CHelper.trace(traceName, "subsMGChildSubsPK: "+subsMGChildSubsPK);
+
+									var subsMGChildSubsId=subscriptionsMGChild.get(m).getXPath("kpSubscription.sIdSubscription");
+									CHelper.trace(traceName, "subsMGChildSubsId: "+subsMGChildSubsId);
+									var subsMGChildMGcode=subscriptionsMGChild.get(m).getXPath("kpSubscription.kpManagementGroup.sCode");
+									CHelper.trace(traceName, "subsMGChildMGcode: "+subsMGChildMGcode);
+									var subsMGChildIScode=subscriptionsMGChild.get(m).getXPath("kpSubscription.kpInvoiceSection.sCode");
+									CHelper.trace(traceName, "subsMGChildIScode: "+subsMGChildIScode);
+
+
+									var existsSubs=newMGxIS.getXPath("exists(xMGxInvoiceSectionSubs[kpSubscriptionMGxIS.sIdSubscription ='"+ subsMGChildSubsId +"'])");
+
+									CHelper.trace(traceName, "existsSubs: "+existsSubs);
+									if(subsMGChildMGcode==subsMGcode && subsMGChildIScode==subsMGIScode)
+									{
+
+										var subsMGChildSubsAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.sIdSubscription = '"+subsMGChildSubsId+"'AND kpSubscription.kpManagementGroup.sCode = '"+subsMGcode+"' AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+										CHelper.trace(traceName, "subsMGChildSubsAmount: "+subsMGChildSubsAmount);
+
+										if(!existsSubs && subsMGChildSubsAmount>0)
+										{
+											var newMGxISsubscription=newMGxIS.newCollectionItem("xMGxInvoiceSectionSubs");
+											newMGxISsubscription.setXPath("kpSubscriptionMGxIS",subsMGChildSubsPK);
+											newMGxISsubscription.setXPath("cSubscriptionBudgetAmount",subsMGChildSubsAmount);
+										}
+										}
+
+
+								}
+
+								// Add Purposes to collection of each MG Child Added
+								var subsMGChildPS=CHelper.GetValueAsCollection(<mABC.kmBudgetInfo.xBudgetDetails>);
+								var subsMGChildPSsize=subsMGChildPS.size();
+								CHelper.trace(traceName, "subsMGChildPSsize: "+subsMGChildPSsize);
+
+								for(var p=0;p<subsMGChildPSsize;p++)
+								{
+									var subsMGCSubsPK=subsMGChildPS.get(p).getXPath("kpSubscription");
+									CHelper.trace(traceName, "subsMGCSubsPK: "+subsMGCSubsPK);
+
+									var subsMGCSubsId=subsMGChildPS.get(p).getXPath("kpSubscription.sIdSubscription");
+									CHelper.trace(traceName, "subsMGCSubsId: "+subsMGCSubsId);
+
+									var subsMGCcode=subsMGChildPS.get(p).getXPath("kpSubscription.kpManagementGroup.sCode");
+									CHelper.trace(traceName, "subsMGCcode: "+subsMGCcode);
+
+									var subsMGCIScode=subsMGChildPS.get(p).getXPath("kpSubscription.kpInvoiceSection.sCode");
+									CHelper.trace(traceName, "subsMGCIScode: "+subsMGCIScode);
+
+									var subsMGCPSid=subsMGChildPS.get(p).getXPath("kpSubscription.kpPurpose");
+									CHelper.trace(traceName, "subsMGCPSid: "+subsMGCPSid);
+
+									var subsMGCPScode=subsMGChildPS.get(p).getXPath("kpSubscription.kpPurpose.sCode");
+									CHelper.trace(traceName, "subsMGCPScode: "+subsMGCPScode);
+
+
+									var existsPurposesxMGC=newMGxIS.getXPath("exists(xMGxInvoiceSectionPurps[kpMGperISPurpose.sCode ='"+ subsMGCPScode +"'])");
+									CHelper.trace(traceName, "existsPurposesxMGC: "+existsPurposesxMGC);
+
+									if(subsMGCcode==subsMGcode && subsMGCIScode==subsMGIScode)
+									{
+
+										var subsMGChildPurpsAmount= Me.Context.getXPath("sum(mABC.kmBudgetInfo.xBudgetDetails[kpSubscription.kpPurpose.sCode = '"+subsMGCPScode+"'AND kpSubscription.kpManagementGroup.sCode = '"+subsMGcode+"' AND kpSubscription.kpInvoiceSection.sCode = '"+subsMGIScode+"'].cBudgetAmount)");
+										CHelper.trace(traceName, "subsMGChildPurpsAmount: "+subsMGChildPurpsAmount);
+
+										if(!existsPurposesxMGC && subsMGChildPurpsAmount>0)
+										{
+											var newMGxISpurpose=newMGxIS.newCollectionItem("xMGxInvoiceSectionPurps");
+											newMGxISpurpose.setXPath("kpMGperISPurpose",subsMGCPSid);
+											newMGxISpurpose.setXPath("cBdgtAmountMGperISPurps",subsMGChildPurpsAmount);
+										}
+										}
+
+
+								}
+
+
+
+						//Add purposes to collection of current invoice section
+						if(!existsPurpose && purposeAmount>0)
+						{
+						var newPSxIS= newBudgetIS.newCollectionItem("xPurposesIS");
+						newPSxIS.setXPath("kpPurposesxInvoiceSec",subsPurposeid);
+						newPSxIS.setXPath("cBudgetAmountPurposes",purposeAmount);
+						}
+
+
+					}
+
+
+					}
+
+
+			}
+
+
+		}
+	}
+}
+
+
+
+var traceName= "PR - Contract Details "+Me.Case.CaseNumber;
+var OtherDurationVisibility=false;
+
+var otherContractDurationCode=CHelper.getEntityAttrib("PRContractDuration","sCode","idPRContractDuration='6'");
+
+CHelper.trace(traceName, "otherContractDurationCode: "+otherContractDurationCode);
+
+var ContractDurationSelectedCode=<kmContractDetails.kpContractDuration.sCode>;
+CHelper.trace(traceName, "ContractDurationSelectedCode: "+ContractDurationSelectedCode);
+
+if(otherContractDurationCode==ContractDurationSelectedCode)
+{
+	OtherDurationVisibility=true;
+}
+
+
+OtherDurationVisibility;

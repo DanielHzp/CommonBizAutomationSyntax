@@ -9,9 +9,14 @@
 //Assign a value to an attribute in mEntity, depends on expression context (process or entity level)
 //Attribute value remains in the current scope, doesen't PERSIST in the database
 Me.setXPath( "mEntityName.attributeName", valueToAssign);
+Me.setXPath("mEntityName.StringAttributeName","String value");
 
 
-//
+
+
+
+
+//Assign a value to attribute in mEntity of a collection, depends on expression context (process or entity level)
 //CustomMe is an object (foreign or primary key) that refers to a context different than the business rule default context (Me)
 //CustomMe lets the method setXPath navigate the data model starting from the foreign entity 
 var CustomMeExample = Me.newCollectionItem("mEntityName.xEntityCollectionName");
@@ -19,7 +24,29 @@ var valueToAssign="Sample string text"
 	
 CustomMeExample.setXPath("EntityCollectionAttributeName",valueToAssign);
 
+CustomMeExample.setXPath("EntityCollectionStringAttributeName","String Value");
 
+
+
+
+//Assign a value to an attribute of  collection entity 2 which is INSIDE  collection entity 1 (i is an index inside a for-loop)
+var CustomMeExample = Me.newCollectionItem("mEntityName.xEntityCollection1Name["+i+"].xEntityCollection2Name");
+
+//Obtain attribute value of collection entity 2 which is INSIDE collection entity 1 
+var sValuetoAssign = Me.getXPath("mEntityName.xEntityCollection1Name[0].xEntityCollection2Name[1].sAttributeName");
+
+CustomMeExample.setXPath("EntityCollection2AttributeName",sValuetoAssign);
+
+
+//Alternate way to assign a attribute value 
+//In this case we need to assign the primary key of an array record (entity list) to a foreign key
+CustomMeExample.setXPath("EntityCollection2ForeignKey",ExampleArray[i].getXPath("Id"));
+
+
+
+
+
+//Overwrite an existing attribute value of a collection record
 //CustomMe as a reference of a Bizagi array example, here we need to set an attribute value of a specific record in an array:
 var ExampleScopeArray= CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName>);
 var valueToAssign=items[i].getXPath("AttributeName");
@@ -28,9 +55,16 @@ ExampleScopeArray[i].setXPath("EntityCollectionAttributeName", valueToAssign);
 
 
 
+//Alternate way to overwrite an existing attribute value of a collection record 
+Me.setXPath("mEntityName.xEntityCollectionName["+i+"].EntityCollectionAttributeName", <mEntityName.AttributeName>);
 
 
-//This method overwrites a specific record in mEntity, the record is searched using the primary key as a parameter
+
+
+
+
+
+//Overwrite a specific record in mEntity, the record is searched using the primary key as a parameter
 //The attribute value is forced to PERSIST in the database
 var  mEntityPrimaryKey=mEntityArray.get(0).getXPath("idmEntityName");
 

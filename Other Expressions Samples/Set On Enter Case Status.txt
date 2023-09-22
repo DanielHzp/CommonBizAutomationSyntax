@@ -1,0 +1,78 @@
+var FileName="Set Case Status On-enter "+Me.Case.CaseNumber;
+
+// Validate relationship ids between PR process data master entity and case status master entity:
+var newEntryId=<PurchaseRequisition.kmProcessData.kmCurrentCaseStatus>;
+var newEntryIdXpath=Me.getXPath("PurchaseRequisition.kmProcessData.kmCurrentCaseStatus");
+
+CHelper.trace("FileName","<PurchaseRequisition.kmProcessData.kmCurrentCaseStatus>: "+newEntryId);
+CHelper.trace("FileName","newEntryIdXpath: "+newEntryIdXpath);
+
+
+
+//Retrieve the records of the master entity initialized
+//The array is contextualized using the active case number:
+var filterTest="sAssociatedCaseNumber="+"\""+Me.Case.CaseNumber+"\"";
+var caseStatusMasterEntity=Me.getXPath("entity-list('mCurrentCaseStatus','"+filterTest+"')");
+var caseStatusMasterEntitySize=caseStatusMasterEntity.size();
+CHelper.trace("FileName","caseStatusMasterEntitySize: "+caseStatusMasterEntitySize);
+
+
+//Validate the time when the current activity was instantiated
+CHelper.trace("FileName","ON ENTER TIME: "+DateTime.Now+" ACTIVITY: "+Me.Task.Name+" - "+Me.Task.DisplayName);
+
+//Flag to determine if parallel tasks are instantiated
+var parallelInstances=false;
+var userAssignedFullName="One of the following users must open the task: ";
+
+//Obtain surrogate key of case status master entity record(s) and loop over them:
+for(var i=0;i<caseStatusMasterEntitySize;i++){
+
+		var caseStatusId=caseStatusMasterEntity.get(i).getXPath("idmCurrentCaseStatus");
+		CHelper.trace("FileName","caseStatusMasterEntity.get(i).getXPath(idmCurrentCaseStatus): "+caseStatusId);
+
+		var caseStatusTaskName=caseStatusMasterEntity.get(i).getXPath("sTaskName");
+		CHelper.trace("FileName","caseStatusMasterEntity.get(i).getXPath(sTaskName): "+caseStatusTaskName);
+
+		if(CHelper.IsNull(caseStatusTaskName)){
+
+
+			//This method overwrites specific records at data base level, therefore the overwritten attribute values must persist:
+			CHelper.setAttrib("mCurrentCaseStatus",caseStatusId,"sTaskName",Me.Task.DisplayName);
+			CHelper.setAttrib("mCurrentCaseStatus",caseStatusId,"dAssignedSince",DateTime.Now);
+
+			var CountUsersAssigned=Me.Assignees.Count;
+			CHelper.trace("FileName","CountUsersAssigned: "+CountUsersAssigned);
+
+			if(CountUsersAssigned>1){
+
+					for(var j=0;j<CountUsersAssigned;j++){
+
+						var assigneeIterated=Me.Assignees[j].FullName;
+						CHelper.trace("FileName","assigneeIterated: "+assigneeIterated);
+						if(!CHelper.IsNull(assigneeIterated)){
+							userAssignedFullName+=Me.Assignees[j].FullName+", ";
+							CHelper.trace("FileName","userAssignedFullName: "+userAssignedFullName);
+							}
+						}
+
+						  //CHelper.setAttrib("mCurrentCaseStatus",caseStatusId,"sUsersAssigned",Me.Case.WorkingCredential.FullName);
+							CHelper.setAttrib("mCurrentCaseStatus",caseStatusId,"sUsersAssigned",userAssignedFullName);
+					}
+			if(CountUsersAssigned==1){
+
+							userAssignedFullName=Me.Assignees[0].FullName;
+							//userAssignedFullName=Me.Case.WorkingCredential.FullName;
+							CHelper.trace("FileName","Only userAssignedFullName: "+userAssignedFullName);
+
+							CHelper.setAttrib("mCurrentCaseStatus",caseStatusId,"sUsersAssigned",userAssignedFullName);
+
+					}
+			// As soon as the case status record if filled, exit the master entity for loop
+			break;
+
+				}
+		}
+
+//CHelper.trace("FileName","<PurchaseRequisition.kmProcessData.kmCurrentCaseStatus.sTaskName>: "+<PurchaseRequisition.kmProcessData.kmCurrentCaseStatus.sTaskName>);
+
+

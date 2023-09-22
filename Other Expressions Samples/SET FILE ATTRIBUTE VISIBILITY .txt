@@ -1,0 +1,16 @@
+
+
+
+var visible = false;
+
+var sizeFile = <count(xPath_del_atributo_tipo_file)>;
+
+if (sizeFile > 0)
+
+{
+
+visible = true;
+
+}
+
+visible;

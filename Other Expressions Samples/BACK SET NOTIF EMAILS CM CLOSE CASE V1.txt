@@ -1,0 +1,88 @@
+
+
+var destinatarios = "";
+var WFU;
+if( <ChangeManagement.ProductRelated.ProductCode>=="AS" || <ChangeManagement.ProductRelated.ProductCode>=="CS" || <ChangeManagement.ProductRelated.ProductCode>=="CP" || <ChangeManagement.ProductRelated.ProductCode>=="MS" || <ChangeManagement.ProductRelated.ProductCode>=="SCS")
+{
+var UsersRoleC=CHelper.getUsersForRole("CloudOperationsManager");
+
+for(var i=0; i<UsersRoleC.Count;i++)
+{
+	CHelper.trace("Final email notifications CH Cloud Operation Manager index", i);
+	var idUserC=UsersRoleC[i];
+	WFU=CEntityManager.GetEntity("WFUSER").GetEntityList("","","idUser="+idUserC+" AND enabled=1","");
+
+	if(WFU.Length>0)
+	{
+		var destinatario = CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserC);
+		CHelper.trace("Final email notifications CH", "destinatario "+destinatario);
+		destinatarios = destinatarios + destinatario + ";";
+		CHelper.trace("Final email notifications CH", "destinatarios final "+destinatarios);
+
+		/*<ChangeManagement.RFCProductRecipientsNotif>= CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserC+ " AND enabled=1")+";"+<ChangeManagement.RFCProductRecipientsNotif>;
+		CHelper.trace("Final email notifications CH", <ChangeManagement.RFCProductRecipientsNotif>);
+		*/
+	}
+	else
+	{
+		CHelper.ThrowValidationError("Cloud operations manager couldn't be notified about the results of this case, make sure the are users with this role");
+	}
+}
+<ChangeManagement.RFCProductRecipientsNotif> = destinatarios;
+}
+
+else if(<ChangeManagement.ProductRelated.ProductCode>=="ASME" || <ChangeManagement.ProductRelated.ProductCode>=="CSME" || <ChangeManagement.ProductRelated.ProductCode>=="MSME" || <ChangeManagement.ProductRelated.ProductCode>=="SCSME")
+{
+	var UsersRoleP=CHelper.getUsersForRole("ProductManager");
+
+	for(var i=0; i<UsersRoleP.Count;i++)
+	{
+		CHelper.trace("Final email notifications CH product manager index", i);
+		var idUserP=UsersRoleP[i];
+		WFU=CEntityManager.GetEntity("WFUSER").GetEntityList("","","idUser="+idUserP+" AND enabled=1","");
+
+		if(WFU.Length>0)
+		{
+			var destinatario = CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserP);
+			CHelper.trace("Final email notifications CH", "destinatario "+destinatario);
+			 destinatarios = destinatarios + destinatario + ";";
+			CHelper.trace("Final email notifications CH", "destinatarios final "+destinatarios);
+			/*<ChangeManagement.RFCProductRecipientsNotif>=<ChangeManagement.RFCProductRecipientsNotif>+";"+CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserP+ " AND enabled=1");
+			CHelper.trace("Final email notifications CH", <ChangeManagement.RFCProductRecipientsNotif>);*/
+		}
+		else
+		{
+			CHelper.ThrowValidationError("Product Manager nor Product Operations Manager could be notified about the results of the change implementation, make sure there are users with this role")
+		}
+	}
+	<ChangeManagement.RFCProductRecipientsNotif> = destinatarios;
+}
+else
+{
+	var UsersRoleIT=CHelper.getUsersForRole("ITManager");
+
+for(var i=0; i<UsersRoleIT.Count;i++)
+{
+	CHelper.trace("Final email notifications CH IT manager index", i);
+	var idUserIT=UsersRoleIT[i];
+	WFU=CEntityManager.GetEntity("WFUSER").GetEntityList("","","idUser="+idUserIT+" AND enabled=1","");
+
+	if(WFU.Length>0)
+	{
+		var destinatario = CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserIT);
+			CHelper.trace("Final email notifications CH", "destinatario "+destinatario);
+			 destinatarios = destinatarios + destinatario + ";";
+			CHelper.trace("Final email notifications CH", "destinatarios final "+destinatarios);
+		/*<ChangeManagement.RFCProductRecipientsNotif>= CHelper.getEntityAttrib("WFUSER","contactEmail","idUser="+idUserIT+ " AND enabled=1") +";"+<ChangeManagement.RFCProductRecipientsNotif>;
+		CHelper.trace("Final email notifications CH", <ChangeManagement.RFCProductRecipientsNotif>);
+		*/
+	}
+	else
+	{
+		CHelper.ThrowValidationError("IT Manager couldn't be notified about the results of the change implementation, make sure there are users with this role");
+
+	}
+}
+<ChangeManagement.RFCProductRecipientsNotif> = destinatarios;
+}
+// CHelper.ThrowValidationError("STOP REGLA DESTINATARIOS");

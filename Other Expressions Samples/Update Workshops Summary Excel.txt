@@ -1,0 +1,72 @@
+CHelper.trace("wendi","student");
+var codigo = <TCM_Workshop.WorkshopType.Code>
+var attendees = <TCM_Workshop.TCM_Workshop_TCM_Attendee>
+for( var i=0; i<attendees.size(); i++){
+var nuevo = Me.newCollectionItem("TCM_Workshop.WorkshopSummary")
+var attendee_attendance = Me.getXPath("TCM_Workshop.TCM_Workshop_TCM_Attendee.TCM_Attendee_TCM_Workshop.Sessions.Attendances[TCM_Session.TCM_Workshop.WorkshopType.Code = "+codigo+"]");
+//CHelper.trace("wendi", "paso el error");
+nuevo.setXPath("Stundent",attendees[i].getXPath("Name"));
+nuevo.setXPath("LastName",attendees[i].getXPath("LastName"));
+nuevo.setXPath("Email",attendees[i].getXPath("Email"));
+nuevo.setXPath("Company",attendees[i].getXPath("Company.Name"));
+if (attendees[i].getXPath("Partner") == true){
+if (attendees[i].getXPath("Voucher") == true){
+nuevo.setXPath("Voucher","Yes");
+}
+if (attendees[i].getXPath("Voucher") == false){
+nuevo.setXPath("Voucher","No");
+}
+nuevo.setXPath("Partner","Yes");
+}else{
+nuevo.setXPath("Voucher","No");
+nuevo.setXPath("Partner","No");
+}
+if (attendees[i].getXPath("Payment") == true){
+nuevo.setXPath("Payment","Yes");
+nuevo.setXPath("Price",<TCM_Workshop.Price>);
+}else{
+nuevo.setXPath("Payment","No");
+nuevo.setXPath("Price",0);
+}
+CHelper.trace("wendi", "paso el error");
+if(codigo==1){
+nuevo.setXPath("Session1",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].ModelingPre").toString()+"%");
+}
+if(codigo==2){
+nuevo.setXPath("Session2",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].Auto1Pre").toString()+"%");
+}
+if(codigo==3){
+nuevo.setXPath("Integration",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].InteanddevPre").toString()+"%");
+nuevo.setXPath("BuildingC",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].BuildingConectorsPre").toString()+"%");
+nuevo.setXPath("Widgets",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].WidgetsPre").toString()+"%");
+}
+if(codigo==4){
+nuevo.setXPath("Session3",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].Auto2Pre").toString()+"%");
+}
+for ( var k=0; k<attendee_attendance.size(); k++){
+if(attendee_attendance[k].getXPath("TCM_Session.Sessions")=='Session 1' && attendee_attendance[k].getXPath("TCM_Attendee.Email") == attendees[i].getXPath("Email") ){
+nuevo.setXPath("Comment1",attendee_attendance[k].getXPath("Comments"));
+if (attendee_attendance[k].getXPath("Attended")== true){
+nuevo.setXPath("Attendance1","Yes");
+}else{
+nuevo.setXPath("Attendance1","No");
+}
+}
+if(attendee_attendance[k].getXPath("TCM_Session.Sessions")=='Session 2' && attendee_attendance[k].getXPath("TCM_Attendee.Email") == attendees[i].getXPath("Email")){
+nuevo.setXPath("Comment2",attendee_attendance[k].getXPath("Comments"));
+if (attendee_attendance[k].getXPath("Attended")== true){
+nuevo.setXPath("Attendance2","Yes");
+}else{
+nuevo.setXPath("Attendance2","No");
+}
+}
+if(attendee_attendance[k].getXPath("TCM_Session.Sessions")=='Session 3' && attendee_attendance[k].getXPath("TCM_Attendee.Email") == attendees[i].getXPath("Email")){
+nuevo.setXPath("Comment3",attendee_attendance[k].getXPath("Comments"));
+if (attendee_attendance[k].getXPath("Attended")== true){
+nuevo.setXPath("Attendance3","Yes");
+}else{
+nuevo.setXPath("Attendance3","No");
+}
+}
+}
+}

@@ -1,0 +1,76 @@
+
+
+CHelper.trace("duplicase",<CasetoDuplicate.RadNumber>);
+
+var caseToDuplicate = Me.getXPath("entity-list('PurchaseRequisition','RadNumber = \""+<CasetoDuplicate.RadNumber>+"\"')");
+
+CHelper.trace("duplicase",caseToDuplicate.size())
+CHelper.trace("duplicase", "Items a copiar: " + caseToDuplicate[0].getXPath("RequisitionItems").size());
+//Data Mapping
+//Logica Vieja
+
+var radNumber = <CasetoDuplicate.RadNumber>;
+var idPR = CHelper.getEntityAttrib("PurchaseRequisition","idPurchaseRequisition","radNumber = '" + radNumber + "'");
+<ReportingForOtherUser> = CHelper.getEntityAttrib("PurchaseRequisition","ReportingForOtherUser","radNumber = '" + radNumber + "'");
+<Company> = CHelper.getEntityAttrib("PurchaseRequisition","Company","radNumber = '" + radNumber + "'");
+<OtherUser> = CHelper.getEntityAttrib("PurchaseRequisition","OtherUser","radNumber = '" + radNumber + "'");
+<PurchaseType> = CHelper.getEntityAttrib("PurchaseRequisition","PurchaseType","radNumber = '" + radNumber + "'");
+<Purchasesubcategorynew> = CHelper.getEntityAttrib("PurchaseRequisition","Purchasesubcategorynew","radNumber = '" + radNumber + "'");
+<RecurringPurchase> = CHelper.getEntityAttrib("PurchaseRequisition","RecurringPurchase","radNumber = '" + radNumber + "'");
+<HaveAnInvoice> = CHelper.getEntityAttrib("PurchaseRequisition","HaveAnInvoice","radNumber = '" + radNumber + "'");
+<HaveaDocument>= CHelper.getEntityAttrib("PurchaseRequisition","HaveaDocument","radNumber = '" + radNumber + "'");
+<DoYouHaveQuotation> = CHelper.getEntityAttrib("PurchaseRequisition","DoYouHaveQuotation","radNumber = '" + radNumber + "'");
+<PurchaseCategory>= CHelper.getEntityAttrib("PurchaseRequisition","PurchaseCategory","radNumber = '" + radNumber + "'");
+<Category>= CHelper.getEntityAttrib("PurchaseRequisition","Category","radNumber = '" + radNumber + "'");
+<Supplier> = CHelper.getEntityAttrib("PurchaseRequisition","Supplier","radNumber = '" + radNumber + "'");
+<PurchaseCategorylvl2> = CHelper.getEntityAttrib("PurchaseRequisition","PurchaseCategorylvl2","radNumber = '" + radNumber + "'");
+<IsthisaMarketingpurcha> = CHelper.getEntityAttrib("PurchaseRequisition","IsthisaMarketingpurcha","radNumber = '" + radNumber + "'");
+<Paymentmethod> = CHelper.getEntityAttrib("PurchaseRequisition","Paymentmethod","radNumber = '" + radNumber + "'");
+var numberOfItems = caseToDuplicate[0].getXPath("RequisitionItems");
+for(var i = 0; i < numberOfItems.size(); i ++)
+{
+	var newItem = Me.newCollectionItem("PurchaseRequisition.RequisitionItems");
+	newItem.setXPath("Name",numberOfItems[i].getXPath("Name"));
+	//newItem.setXPath("Currency",numberOfItems[i].getXPath("Currency"));
+	newItem.setXPath("Description",numberOfItems[i].getXPath("Description"));
+	newItem.setXPath("EndDate",numberOfItems[i].getXPath("EndDate"));
+	newItem.setXPath("InitaialDate",numberOfItems[i].getXPath("InitaialDate"));
+	newItem.setXPath("Quantity",numberOfItems[i].getXPath("Quantity"));
+	newItem.setXPath("UnitValue",numberOfItems[i].getXPath("UnitValue"));
+	newItem.setXPath("TotalValue", numberOfItems[i].getXPath("Quantity") * numberOfItems[i].getXPath("UnitValue"));
+}
+
+<RequisitionDescription> = CHelper.getEntityAttrib("PurchaseRequisition","RequisitionDescription","radNumber = '" + radNumber + "'");
+<RequisitionCurrency> = CHelper.getEntityAttrib("PurchaseRequisition","RequisitionCurrency","radNumber = '" + radNumber + "'");
+<ChangePOCurrency> = CHelper.getEntityAttrib("PurchaseRequisition","ChangePOCurrency","radNumber = '" + radNumber + "'");
+<PurchaseOrderCurrency> = CHelper.getEntityAttrib("PurchaseRequisition","PurchaseOrderCurrency","radNumber = '" + radNumber + "'");
+<PurchaseOrderValue> = CHelper.getEntityAttrib("PurchaseRequisition","PurchaseOrderValue","radNumber = '" + radNumber + "'");
+<InvoicingTerms> = CHelper.getEntityAttrib("PurchaseRequisition","InvoicingTerms","radNumber = '" + radNumber + "'");
+<OtherInvoicingTerms> = CHelper.getEntityAttrib("PurchaseRequisition","OtherInvoicingTerms","radNumber = '" + radNumber + "'");
+<PaymentDays> = CHelper.getEntityAttrib("PurchaseRequisition","PaymentDays","radNumber = '" + radNumber + "'");
+<LegalTerms> = CHelper.getEntityAttrib("PurchaseRequisition","LegalTerms","radNumber = '" + radNumber + "'");
+//<MarketingRelatedRegion> = CHelper.getEntityAttrib("PurchaseRequisition","MarketingRelatedRegion","radNumber = '" + radNumber + "'");
+//<MarketingRelatedGoal> = CHelper.getEntityAttrib("PurchaseRequisition","MarketingRelatedGoal","radNumber = '" + radNumber + "'");
+//<MarketingRelatedBucket> =  CHelper.getEntityAttrib("PurchaseRequisition","MarketingRelatedBucket","radNumber = '" + radNumber + "'");
+<Newcostcenter>  = CHelper.getEntityAttrib("PurchaseRequisition","Newcostcenter","radNumber = '" + radNumber + "'");
+<OtherInvoicingTerms> = CHelper.getEntityAttrib("PurchaseRequisition","OtherInvoicingTerms","radNumber = '" + radNumber + "'");
+<SingleSupplier> = CHelper.getEntityAttrib("PurchaseRequisition","SingleSupplier","radNumber = '" + radNumber + "'");
+
+
+<BizagiCorpCompany> = CHelper.getEntityAttrib("PurchaseRequisition","BizagiCorpCompany","radNumber = '" + radNumber + "'");
+<Nameofdeal> = CHelper.getEntityAttrib("PurchaseRequisition","Nameofdeal","radNumber = '" + radNumber + "'");
+<FYCV> = CHelper.getEntityAttrib("PurchaseRequisition","FYCV","radNumber = '" + radNumber + "'");
+<CRMOpportunity> = CHelper.getEntityAttrib("PurchaseRequisition","CRMOpportunity","radNumber = '" + radNumber + "'");
+<TotalCommission> = CHelper.getEntityAttrib("PurchaseRequisition","TotalCommission","radNumber = '" + radNumber + "'");
+
+var numberOfItems2 = caseToDuplicate[0].getXPath("CommissionBreakdownList");
+if(numberOfItems2.size()>0){
+Me.deleteAllCollectionItems("PurchaseRequisition.CommissionBreakdownList")
+
+for(var i = 0; i < numberOfItems2.size(); i ++)
+{
+	var newItem = Me.newCollectionItem("PurchaseRequisition.CommissionBreakdownList");
+	newItem.setXPath("Selected",numberOfItems2[i].getXPath("Selected"));
+	newItem.setXPath("CommissionBreakdown",numberOfItems2[i].getXPath("CommissionBreakdown"));
+}
+}

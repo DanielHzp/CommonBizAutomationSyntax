@@ -1,0 +1,67 @@
+
+// CM case log syntax
+
+var filter = "Code = 'CAN'";
+var phase = CEntityManager.GetEntity("ChangeStatus").GetEntityList("", "", filter, "");
+for(var i = 0;i<phase.Length;i++){
+	var newEntry = Me.newCollectionItem("ChangeManagement.ChangeRequestFinalLog");
+	newEntry.setXPath("ChangeStatus",phase[i].SurrogateKeyValue);
+	newEntry.setXPath("UserLog",Me.Case.WorkingCredential.UserId);
+	newEntry.setXPath("DateLog",DateTime.Now);
+}
+
+
+
+
+
+var filter = "Code = 'RESR'";
+var phase = CEntityManager.GetEntity("ChangeStatus").GetEntityList("", "", filter, "");
+for(var i = 0;i<phase.Length;i++){
+	var newEntry = Me.newCollectionItem("ChangeManagement.ChangeRequestFinalLog");
+	newEntry.setXPath("ChangeStatus",phase[i].SurrogateKeyValue);
+	newEntry.setXPath("UserLog",Me.Case.WorkingCredential.UserId);
+	newEntry.setXPath("DateLog",DateTime.Now)
+	newEntry.setXPath("sApproverComments",<ChangeManagementCommitee.ChangeCommitte.Comments>);
+}
+//This is done for visibility purposes only
+<ChangeManagement.ResultsRegistered> = true;
+
+<ChangeManagement.EndTime> = DateTime.Now;
+
+<ChangeManagement.ProcessingTime> = (CHelper.getEffectiveDurationForUser(<ChangeManagement.Requester.idUser>, <ChangeManagement.StartTime>, <ChangeManagement.EndTime>) / 60);
+
+
+
+
+// PR case log syntax
+
+var filter;
+if(<PurchaseRequisition.Category.Code> == 'ITE'){
+	filter = "Code = 'CPPIT'";
+}else{
+	filter = "Code = 'CPPPD'";
+}
+var phase = CEntityManager.GetEntity("PurchaseRequisitionStatu").GetEntityList("", "", filter, "");
+for(var i = 0;i<phase.Length;i++){
+	var newEntry = Me.newCollectionItem("PurchaseRequisition.RequisitionCaseLog");
+	newEntry.setXPath("LogStatus",phase[i].SurrogateKeyValue);
+	newEntry.setXPath("LogUser",Me.Case.WorkingCredential.UserId);
+	newEntry.setXPath("LogDate",DateTime.Now);
+	newEntry.setXPath("LogComments",<PurchaseRequisition.FirstAnalysisComments>);
+}
+
+
+
+
+
+
+var comments = <PurchaseRequisition.Currentapprovercomments> == null ? "" : <PurchaseRequisition.Currentapprovercomments>;
+var approver = <PurchaseRequisition.CurrentPurchaseApprover.idUser>;
+var date = DateTime.Now;
+var decision = <PurchaseRequisition.Currentpurchaseapproval.Id>;
+var approval = Me.newCollectionItem("PurchaseRequisition.PurchaseApprovalLogs");
+approval.setXPath("Approver", approver);
+approval.setXPath("ApprovalDate", date);
+approval.setXPath("ApprovalDecision", decision);
+approval.setXPath("ApproverComments", comments);
+approval.setXPath("Approvalphase", <PurchaseRequisition.Currentapprovalphase>);
