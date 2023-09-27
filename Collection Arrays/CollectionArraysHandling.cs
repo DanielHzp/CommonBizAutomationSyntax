@@ -29,12 +29,20 @@ var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.s
 //Sum all values of a collection integer/currency attribute with custom filter
 var AttributeSum= Me.getXPath("sum(mProcessEntityName.kmForeignKey.xCollectionName[kpForeignKey.StringAttributeName = '"+StringVariable+"'AND kpForeignKey.kpForeignKey2.StringAttributeName = '"+StringVariable2+"' AND StringAttributeName = '"+StringVariable3+"'].cCurrencyAttribute)");
 
+var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depende on Me context but ONLY works with STATIC filters
 
+
+//Count records of a filtered collection ONLY WITH static filters
+var countRecords = <count(mProcessEntity.xCollectionName[kpForeignKeyParamEntity.iAttributeName = mProcessEntity.AttributeName])>;
 
 //Declare an arraylist and add items inside a business rule
 var arrayListName = new ArrayList();
 arrayListName.Add(VariableName);
 
+
+//Obtain UNIQUE attribute records from a collection 
+var DistinctRecordsArray = <distinct-values(mProcessEntityName.xCollectionName.AttributeName)>;
+var CollectionArray = CHelper.GetValueAsCollection(DistinctRecordsArray);
 
 
 
@@ -49,6 +57,7 @@ var collectionArraySize=collectionArray.size();
 
 //Static filter in CHelper methods
 var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[bBooleanAttributeName = true]>);
+var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[cCurrencyAttributeName = null OR cCurrencyAttributeName <= 0]>);
 var collectionArraySize=collectionArray.size();
 
 
