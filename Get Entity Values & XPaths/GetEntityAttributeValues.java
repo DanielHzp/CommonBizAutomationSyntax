@@ -4,6 +4,15 @@
 //Obtain attribute value using an XPath to navigate to the attribute (XPath starting entity depends on the business rule context/scope)
 var AttributeValuetoObtain=<mMasterEntityName.Attribute>;
 
+//Obtain and save the PRIMARY KEY of a process/transactional master entity
+var processEntityPrimaryKeyd=<mProcessEntityName>;    //Primary key of the case (works at process level business rules)
+
+
+//Obtain the foreign key INTEGER VALUE between a master entity and a parameter entity (use 'id' attribute SQL property)
+var kpForeignKeyParamEntity = <mProcessEntityName.kmmMasterEntityName.kpForeignKeyParamEntity.Id>;   //'.Id' is a system attribute that gets the id number of a related attribute relationship
+
+
+
 //Obtain attribute value using contextualized XPath method
 //Me object refers to the business rule context/scope (Process or entity level)
 var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");

@@ -9,6 +9,16 @@ var filter = "sStringAttributeName in('StringValue','LADV','TEA')";
 
 
 
+//Filter a parameter entity values by a value selected  in another dropdown list
+var ParamEntityAttributeValue=<kmForeignKeyEntity.kpForeignKeyParamEntity1.sStringParamAttribute>;  //sStringParamAttribute could be a parameter entity business key attribute
+
+filter="(kpForeignKeyParamEntity1.sStringParamAttribute='"+ParamEntityAttributeValue+"')"; //The filtered param entity has a  relationship to ParamEntity1
+
+
+
+
+
+
 //Filter the parameter entity values that DO NOT have certain attribute values (business key attribute sCode)
 var iIntegerValue= Me.Case.ParentProcessId;
 
