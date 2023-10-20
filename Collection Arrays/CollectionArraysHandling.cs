@@ -75,7 +75,7 @@ for(var i=0; i<collectionArray.size(); i++)
 	//Obtain primary key of i-th entity record
 	var primaryKeyRecord-ith= collectionArray.get(i);
 	
-	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("Id");
+	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("Id"); //Obtain the NUMERIC value of the primary key of the i-th entity record
 	
 	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("idEntityName");
 	
@@ -160,6 +160,8 @@ for(var i=0; i<collectionArray.size(); i++)
 	
 	var  primaryKeyRecord-ith =collectionArray.get(i);
 	
+	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("Id"); //Obtain the NUMERIC value of the primary key of the i-th entity record
+	
 	//Obtain attribute of i-th entity record 
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
 	var attributeValueRecord-ith=collectionArray.get(i).getXPath("kpForeignKey.ksForeignKeySystemEntity");
@@ -178,7 +180,7 @@ for(var i=0; i<collectionArray.size(); i++)
 //XPath navigation to obtain collection arrays----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Obtain data from activity scope with context Me reference 
 
-var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].AmountToBePaid");
+var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName");
 var collectionArray = <mProcessEntityName.xCollectionName>;
 var collectionArraySize=collectionArray.size();
 var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();
@@ -186,10 +188,13 @@ var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>
 
 
 //XPath collection navigation for-loop syntax:
-for(var i=0; i<collectionArray.size(); i++)
+for(var i=0; i<collectionArray.size(); i++)  //Or
+for(var i=0;i< <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();i++)
 {
 	//Obtain primary key of i-th entity record
 	var primaryKeyRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i];
+	
+	var primaryKeyRecord-ith=collectionArray[i].getXPath("Id"); //Obtain the NUMERIC value of the primary key of the i-th entity record
 	
 	
 	//Obtain attribute of i-th entity record 
@@ -197,14 +202,20 @@ for(var i=0; i<collectionArray.size(); i++)
 	
 	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("AttributeName");
 	
+	if(CHelper.IsNull(attributeValueRecord-ith)){ ... }
 	
 	//Obtain data from activity scope with CustomMeExample reference
 	var collectionArrayRecord-ith = collectionArray[i].getXPath("xCollectionNameofRecord-ith");
-	var collectionArrayRecord-ith =CustomMe.getXPath("xCollectionNameofRecord-ith[kpForeignKey.sStringAttribute ='"+ StringVariable +"'])");
+	
+	var collectionArrayRecord-ith=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("xCollectionNameofRecord-ith");
+	
+	var collectionFilteredArrayRecord-ith =CustomMe.getXPath("xCollectionNameofRecord-ith[kpForeignKey.sStringAttribute ='"+ StringVariable +"'])"); //CustomMe refers to collectionArray[i] object
 	
 	var newRecord= CustomMe.newCollectionItem("xCollectionNameofRecord-ith");
 	newRecord.setXPath("BuildingC",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].BuildingConectorsPre").toString()+"%")
 }
+	
+	
 	
 
 
