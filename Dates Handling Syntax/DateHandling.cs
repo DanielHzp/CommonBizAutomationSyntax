@@ -5,6 +5,8 @@
 //Obtain the exact current date
 var Today=DateTime.Today;
 
+//Obtain the creation date of a current case instance
+var creationDate = Me.Case.CreationDate;
 
 //Obtain a date type attribute navigating the data model 
 var dDateAttributeValue = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>;
