@@ -108,16 +108,18 @@ var processEntityPrimaryKeyd=<mEntityName>;    //Primary key of the case
 
 
 
-//Clean value of TWO NESTED PARAMETER ENTITIES relationships at the same time (two nested dropdown lists )
-//ParameterEntityL2  has a relationship to ParameterEntityL1  (kpParameterEntityL2)
-<PurchaseRequisition.kpParameterEntityL2>= null;
+//Clean values of TWO CASCADING PARAMETER ENTITIY relationships at the same time 
+//Cascading dropdown lists: Process Entity ---> ParameterEntityL2 ---> ParameterEntityL1 
+//ParameterEntityL2  has a relationship to ParameterEntityL1 (kpParameterEntityL2): Process Entity ---> ParameterEntityL2 ---> ParameterEntityL1
+
+<PurchaseRequisition.kpParameterEntityL2>= null;  //Deletes Id key of the parent category L1 in the process entity table
 
 
 
 
 
-//Set value to TWO NESTED PARAMETER ENTITIES at the same time (two nested dropdown lists )
-//ParameterEntityL2  has a relationship to ParameterEntityL1  (kpParameterEntityL2)
+//Set value to TWO CASCADING PARAMETER ENTITIES at the same time (two nested dropdown lists )
+//ParameterEntityL2  has a relationship to ParameterEntityL1 (kpParameterEntityL2): Process Entity ---> ParameterEntityL2 ---> ParameterEntityL1
 <PurchaseRequisition.kpParameterEntityL2>= CHelper.getEntityAttrib("ParameterEntityL2Name","idParameterEntityL2Name", "stringCode = 'InsertCodeValue' ");
 
 
