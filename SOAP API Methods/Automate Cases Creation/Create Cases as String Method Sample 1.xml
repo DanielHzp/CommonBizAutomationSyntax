@@ -1,0 +1,57 @@
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:createCasesAsString>
+         <!--Optional:-->
+         <tem:casesInfo><![CDATA[<BizAgiWSParam>
+               <domain>domain</domain>
+               <userName>admon</userName>
+               <Cases>
+                  <Case>
+                     <Process>PartnerCertificati_1</Process>
+                     <Entities>
+                    <mPMS_PartnerCert>
+                        <kmPartner key="140">
+                            <xmOpportunities>
+                                <mPMS_Opportunity key="258956">
+                                    <bDecisionMaker>true</bDecisionMaker>
+                                    <CompletionDate>2022-12-13T12:12:12</CompletionDate>
+                                    <dApprovalDate>2022-12-13T12:12:12</dApprovalDate>
+                                    <sCustomerNeed>str1234</sCustomerNeed>
+                                    <sParentAccountID>str1234</sParentAccountID>
+                                    <sOpportunityID>str1234</sOpportunityID>
+                                    <dPPMApprovalDate>2012-12-13T12:12:12</dPPMApprovalDate>
+                                    <dStartDate>2022-10-13T12:12:12</dStartDate>
+                                    <xProjectFiles>
+								<mPMSProjectFiles key="104">
+									<sName>Prueba LMT Files Mgmt 2</sName>
+									<bOmmited>false</bOmmited>
+									<uFile>
+									<File fileName="Nombre Archivo Prueba LMT 2.pdf">INSERT BASE 64 STRING HERE=</File>
+									</uFile>
+								</mPMSProjectFiles>
+							</xProjectFiles>
+                                    <kpStatus>1</kpStatus>
+                                    <cEstimatedValue>123.45</cEstimatedValue>
+                                    <sCustomer>PRUEBA LMT Files Mgmt</sCustomer>
+                                    <sDescription>PRUEBA LMT Files Mgmt</sDescription>
+                                    <dEstimatedCompletionDate>2012-12-13T12:12:12</dEstimatedCompletionDate>
+                                    <dFinalDecisionDate>2012-12-13T12:12:12</dFinalDecisionDate>
+                                    <sParentContactID>str1234</sParentContactID>
+                                    <cBudgetAmount>123.45</cBudgetAmount>
+                                    <bSelectedForReview>false</bSelectedForReview>
+                                    <sName>PRUEBA LMT Files Mgmt</sName>
+                                </mPMS_Opportunity>
+                            </xmOpportunities>
+                        </kmPartner>
+                        <kpCaseType businessKey="sCode='MANAGE_PROJ'"/>
+                    </mPMS_PartnerCert>
+                </Entities>
+                  </Case>
+               </Cases>
+            </BizAgiWSParam>]]></tem:casesInfo>
+      </tem:createCasesAsString>
+   </soapenv:Body>
+</soapenv:Envelope>

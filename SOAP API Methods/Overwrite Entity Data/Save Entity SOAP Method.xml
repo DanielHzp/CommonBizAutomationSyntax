@@ -1,0 +1,46 @@
+
+
+<!--Save entity SOAP layer method that overwrites an existing value of an attribute in a database entity-->
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:saveEntity>
+         <!--Optional:-->
+         <tem:entityInfo>
+            <BizAgiWSParam>
+               <Entities>
+                  <MasterEntityName key="32803">
+                     <StringAttributeName>String Text to Replace</StringAttributeName>
+                     <DateAttributeName>2022-05-09</DateAttributeName>
+                     <IntegerAttributeName>9</IntegerAttributeName>
+                     <StartDateString>09/05/2022</StartDateString>
+                  </MasterEntityName>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soap:Body>
+</soap:Envelope>
+
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:saveEntity>
+         <!--Optional:-->
+         <tem:entityInfo>
+           <BizAgiWSParam>
+               <Entities>
+                  <MasterEntityName key="12345">
+                     <kpForeignKeyAttributeName>2</kpForeignKeyAttributeName>
+                     <NewCostCenterToAllocat>35</NewCostCenterToAllocat>
+                  </MasterEntityName>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soapenv:Body>
+</soapenv:Envelope>
