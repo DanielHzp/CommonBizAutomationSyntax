@@ -1,5 +1,6 @@
 
 
+<!--Legacy security layer in the environment must be turned off when executing a SOAP web service method from SoapUI-->
 <!--Save entity SOAP layer method that overwrites an existing value of an attribute in a database entity-->
 
 <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
