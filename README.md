@@ -1,6 +1,6 @@
 # Business Rules Syntax
 
-This is a repository of commonly used classes, methods, functions and objects in business rules of processes automated with Bizagi Studio. Sample syntax is provided for multiple purposes and needs. 
+This is a repository of commonly used syntax (classes, methods, functions and objects) in business rules of process workflows automated with Bizagi Expression Language (BEL). Sample syntax is provided for multiple purposes and functionalities logic.
 
 ## Usage
 
