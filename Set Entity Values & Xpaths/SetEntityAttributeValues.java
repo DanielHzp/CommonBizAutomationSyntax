@@ -6,6 +6,8 @@
 <mProcessEntityName.kmForeignKeytoEntity2.attributeName> = valueToAssign;
 
 
+
+
 //Assign a value to an attribute in mEntity, depends on expression context (process or entity level)
 //Attribute value remains in the current scope, doesen't PERSIST in the database
 Me.setXPath( "mEntityName.attributeName", valueToAssign);
@@ -29,7 +31,10 @@ CustomMeExample.setXPath("EntityCollectionStringAttributeName","String Value");
 
 
 
+
+
 //Assign a value to an attribute of  collection entity 2 which is INSIDE  collection entity 1 (i is an index inside a for-loop)
+//Option 1 (mEntityName --> xEntityCollection1 --> xEntityCollection2)
 var CustomMeExample = Me.newCollectionItem("mEntityName.xEntityCollection1Name["+i+"].xEntityCollection2Name");
 
 //Obtain attribute value of collection entity 2 which is INSIDE collection entity 1 
@@ -41,6 +46,15 @@ CustomMeExample.setXPath("EntityCollection2AttributeName",sValuetoAssign);
 //Alternate way to assign a attribute value 
 //In this case we need to assign the primary key of an array record (entity list) to a foreign key
 CustomMeExample.setXPath("EntityCollection2ForeignKey",ExampleArray[i].getXPath("Id"));
+
+
+//Assign a value to an attribute of collection entity 2 which is INSIDE  collection entity 1 (i is an index inside a for-loop)
+//Option 2 (mEntityName --> xEntityCollection1 --> xEntityCollection2)
+var CustomMeExample2=Me.newCollectionItem("mEntityName.xEntityCollection1Name");
+
+var CustomMeExample3=CustomMeExample2.newCollectionItem("xEntityCollection2");
+
+
 
 
 
@@ -55,8 +69,12 @@ ExampleScopeArray[i].setXPath("EntityCollectionAttributeName", valueToAssign);
 
 
 
+
+
 //Alternate way to overwrite an existing attribute value of a collection record 
 Me.setXPath("mEntityName.xEntityCollectionName["+i+"].EntityCollectionAttributeName", <mEntityName.AttributeName>);
+
+
 
 
 
@@ -71,6 +89,9 @@ var  mEntityPrimaryKey=mEntityArray.get(0).getXPath("idmEntityName");
 CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,valueToAssign);
 
 CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,null);
+
+
+
 
 
 
@@ -101,10 +122,11 @@ var processEntityPrimaryKeyd=<mEntityName>;    //Primary key of the case
 
 
 
+
+
+
 //Clean value of a parameter entity relationship (clean dropdown list selected value)
 <mEntityName.kpForeingKeyParameterEntity> = null;
-
-
 
 
 
@@ -116,11 +138,12 @@ var processEntityPrimaryKeyd=<mEntityName>;    //Primary key of the case
 
 
 
-
-
 //Set value to TWO CASCADING PARAMETER ENTITIES at the same time (two nested dropdown lists )
 //ParameterEntityL2  has a relationship to ParameterEntityL1 (kpParameterEntityL2): Process Entity ---> ParameterEntityL2 ---> ParameterEntityL1
 <PurchaseRequisition.kpParameterEntityL2>= CHelper.getEntityAttrib("ParameterEntityL2Name","idParameterEntityL2Name", "stringCode = 'InsertCodeValue' ");
+
+
+
 
 
 
