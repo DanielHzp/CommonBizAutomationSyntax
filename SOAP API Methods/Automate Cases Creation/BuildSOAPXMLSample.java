@@ -1,11 +1,5 @@
-// Name : jobCOMOnboardFuture
-// Author: JC
-// Created: 2019/06/06
-// LastModified: 2019/06/06
-// Description:
-// Input:none
-// Output:
-//
+
+
 var sRuleName, sFilter, sFilterBase, sLimitDate, sXML, sMessExc;
 var olCP, olCPH;
 var olM, olP, olS
@@ -19,45 +13,12 @@ kpStatusFT = CHelper.getEntityAttrib("pProductOnboardStatus","idpProductOnboardS
 sFilterBase = "kpProductOnboardStatus=" + kpStatusFT + " AND mCustomerProduct=";
 Common.TraceJob(null, sRuleName, "sFilterBase:"+sFilterBase, 5);
 //
-//sLimitDate = Common.DateToString(null, DateTime.Today.AddDays(5), 17); //JC - DEPLOY ERROR CHelper.resolveVocabulary(null,"COMOnboardFutureInAdvDays")
 sLimitDate = Common.DateToString(null, DateTime.Today.AddDays(CHelper.resolveVocabulary(null,"COMOnboardFutureInAdvDays")), 17);
 Common.TraceJob(null, sRuleName, "sLimitDate:"+sLimitDate, 5);
 //
 //create list of cases that contain the Future Prods------------------------
 //
-/*
-//get Maps that need CloudConfig
-olM = CEntityManager.GetEntity("pCOMOnboardMap").GetEntityList("", "", "bNeedsCloudConfig = 1", "");
-sFilter = "kpCOMOnboardMap in (-1";
-for (i=0; i<olM.Length; i++)
-{
-	sFilter += "," + olM[i].SurrogateKeyValue.toString();
-}
-sFilter += ")";
-Common.TraceJob(null, sRuleName, "sFilter pCOMOnboardMap:"+sFilter, 5);
-//
-//get ProdType for those Maps
-olP = CEntityManager.GetEntity("pProductType").GetEntityList("", "", sFilter, "");
-sFilter = "kpProductType in (-1";
-for (i=0; i<olP.Length; i++)
-{
-	sFilter += "," + olP[i].SurrogateKeyValue.toString();
-}
-sFilter += ")";
-Common.TraceJob(null, sRuleName, "sFilter pProductType:"+sFilter, 5);
-//
-//get SKUs
-olS = CEntityManager.GetEntity("pSKU").GetEntityList("", "", sFilter, "");
-sFilter = "kpSKU in (-1";
-for (i=0; i<olS.Length; i++)
-{
-	sFilter += "," + olS[i].SurrogateKeyValue.toString();
-}
-sFilter += ")";
-Common.TraceJob(null, sRuleName, "sFilter SKU:"+sFilter, 5);
-//other filter
-sFilter += " AND mCustomer1 is not null "
-*/
+
 sFilter = " mCustomer1 is not null "
 		+  " AND kpProductOnboardStatus = " + kpStatusFT
 		+  " AND dStartDate <= " +  sLimitDate;

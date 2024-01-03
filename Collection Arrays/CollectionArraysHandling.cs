@@ -238,3 +238,16 @@ for(var i=0;i<UsersRole.Count; i++){
 //Validate if a specific user has certain role
 if(<mProcessEntity.kmWFUserForeingKey.Roles[roleName = 'UserRoleName']>!=null){...}
 
+
+//Method that obtains the size of an array containing all assignees of an active task/activity 
+
+var CountUsersAssigned=Me.Assignees.Count;
+
+for(var j=0;j<CountUsersAssigned;j++){
+
+						var assigneeIterated=Me.Assignees[j].FullName; //Obtain the full name of the i-th user assigned to a task/activity
+						
+						
+
+}
+

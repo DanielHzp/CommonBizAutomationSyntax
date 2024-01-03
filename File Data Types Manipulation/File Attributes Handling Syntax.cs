@@ -1,6 +1,23 @@
 
 //Sample syntax to manipulate file attributes in bizagi business rules 
 
+
+// Set file attribute visibility if it´s not empty/null
+var visible = false;
+
+var sizeFile = <count(Xpath navigating to file attribute)>;
+
+if (sizeFile > 0)
+
+{
+
+visible = true;
+
+}
+
+visible;   //Returns a variable true/false if the rule is executed inside the file attribute visibility property 
+
+
 //Get the user that performed the task
 var userId = Me.Case.WorkingCredential.UserId;
 

@@ -10,12 +10,13 @@
                <userName>admon</userName>
                <Cases>
                   <Case>
-                     <Process>PartnerCertificati_1</Process>
+                     <Process>Process Name</Process>
                      <Entities>
-                    <mPMS_PartnerCert>
-                        <kmPartner key="140">
-                            <xmOpportunities>
-                                <mPMS_Opportunity key="258956">
+                    <mProcessEntityName>
+<!--A foreing key is specified for the new case to populate a relationship between the process entity and an existing record in the target entity-->				
+                        <kmForeignKeySample key="140">
+                            <xCollectionName> // Validate if this refers to a collection or master entity
+                                <mCollectionMasterEntityName key="1234567">    
                                     <bDecisionMaker>true</bDecisionMaker>
                                     <CompletionDate>2022-12-13T12:12:12</CompletionDate>
                                     <dApprovalDate>2022-12-13T12:12:12</dApprovalDate>
@@ -24,30 +25,28 @@
                                     <sOpportunityID>str1234</sOpportunityID>
                                     <dPPMApprovalDate>2012-12-13T12:12:12</dPPMApprovalDate>
                                     <dStartDate>2022-10-13T12:12:12</dStartDate>
-                                    <xProjectFiles>
-								<mPMSProjectFiles key="104">
-									<sName>Prueba LMT Files Mgmt 2</sName>
-									<bOmmited>false</bOmmited>
-									<uFile>
-									<File fileName="Nombre Archivo Prueba LMT 2.pdf">INSERT BASE 64 STRING HERE=</File>
-									</uFile>
-								</mPMSProjectFiles>
-							</xProjectFiles>
-                                    <kpStatus>1</kpStatus>
-                                    <cEstimatedValue>123.45</cEstimatedValue>
-                                    <sCustomer>PRUEBA LMT Files Mgmt</sCustomer>
-                                    <sDescription>PRUEBA LMT Files Mgmt</sDescription>
-                                    <dEstimatedCompletionDate>2012-12-13T12:12:12</dEstimatedCompletionDate>
-                                    <dFinalDecisionDate>2012-12-13T12:12:12</dFinalDecisionDate>
+                                    <xCollectionName>
+										<mCollectionMasterEntityName key="104">
+											<sName>Prueba LMT Files Mgmt 2</sName>
+											<bOmmited>false</bOmmited>
+											<uFile>
+											<File fileName="Nombre Archivo Prueba LMT 2.pdf">INSERT BASE 64 STRING HERE=</File>
+											</uFile>
+										</mCollectionMasterEntityName>
+								</xCollectionName>
+                                    <kpForeignKeyInsideCollection>1</kpForeignKeyInsideCollection>
+                                    <cCurrencyAttribute>123.45</cCurrencyAttribute>
+                                    <dDateAttribute>2012-12-13T12:12:12</dDateAttribute>   
+                                    <dDateAttribute2>2012-12-13T12:12:12</dDateAttribute2>
                                     <sParentContactID>str1234</sParentContactID>
                                     <cBudgetAmount>123.45</cBudgetAmount>
                                     <bSelectedForReview>false</bSelectedForReview>
-                                    <sName>PRUEBA LMT Files Mgmt</sName>
-                                </mPMS_Opportunity>
-                            </xmOpportunities>
+                                    <sName>Test sample text</sName>
+                                </mCollectionMasterEntityName>
+                            </xCollectionName>
                         </kmPartner>
                         <kpCaseType businessKey="sCode='MANAGE_PROJ'"/>
-                    </mPMS_PartnerCert>
+                    </mProcessEntityName>
                 </Entities>
                   </Case>
                </Cases>

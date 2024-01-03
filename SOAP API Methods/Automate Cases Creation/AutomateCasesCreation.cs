@@ -19,4 +19,28 @@
 
 			CHelper.trace(TraceName, "XML Request input: "+XMl);
 
+			CHelper.usingXPath("kmForeingKeytoEntityX");   // Used to force deployment of foreign key
+
+
 			CHelper.NewCase(XML);
+			
+			
+			
+			
+			
+			
+//SOA is a family of library rules called in a business rule in order to use the method create cases as string 
+//Input parameters values are set in variable 
+try
+{
+	sResponse = SOA.CreateCasesAsString(Me,sHost,sUserName,sPassword,sXML);
+
+	Common.Trace(Me,sRuleName,"sResponse: " + sResponse,2);
+	
+}
+catch (ex)
+{
+	Common.Trace(Me, sRuleName, "ENDED with error:" + ex.message,5);
+	
+	CHelper.RaiseErrorIntermediateEvent("Invocation of CreateCasesAsString in My Bizagi failed");
+}
