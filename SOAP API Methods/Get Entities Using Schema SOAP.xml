@@ -1,0 +1,114 @@
+
+<!--XML body structure for the SOAP method: getEntitiesUsingSchemaAsString-->
+
+<!--First, the XSD schema must be created in the configuration of the entity in Bizagi Studio-->
+<!--The body must be added to  the section tem:Schema-->
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:tem="http://tempuri.org/">
+   <soap:Header/>
+   <soap:Body>
+      <tem:getEntitiesUsingSchemaAsString>
+         <!--Optional:-->
+         <tem:entitiesInfo><![CDATA[<BizAgiWSParam>
+              <EntityData>
+                  <EntityName>mTSMStudentHistory</EntityName>
+                   <Filters>
+                   sCorporateEmail = 'lorenzocrey@gmail.com'
+                  </Filters>
+               </EntityData>
+    </BizAgiWSParam>]]></tem:entitiesInfo>
+         <tem:schema><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="mTSMStudentHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="kmCompany">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="sName" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="kpCountry">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="Nombre" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute form="unqualified" name="entityName" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute form="unqualified" name="entityName" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="xInstructorledTrainingsH">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="mInstructorledHist">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" name="sTrainingName" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="bCreatedinMyBizagi" type="xs:boolean" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="xCertificatesHistory">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="mCertificatesHistory">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" name="sCertificateFileName" type="xs:string" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="dIssueDate" type="xs:dateTime" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="dExpirationDate" type="xs:dateTime" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></tem:schema>
+      </tem:getEntitiesUsingSchemaAsString>
+   </soap:Body>
+</soap:Envelope>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--SOAP method reponse sample tem:Schema-->
+
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+   <s:Header>
+      <a:Action s:mustUnderstand="1">http://tempuri.org/ISecureEntityManagerSOA/getEntitiesUsingSchemaAsStringResponse</a:Action>
+      <o:Security s:mustUnderstand="1" xmlns:o="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <u:Timestamp u:Id="_0">
+            <u:Created>2023-12-05T00:51:21.421Z</u:Created>
+            <u:Expires>2023-12-05T00:56:21.421Z</u:Expires>
+         </u:Timestamp>
+      </o:Security>
+   </s:Header>
+   <s:Body>
+      <getEntitiesUsingSchemaAsStringResponse xmlns="http://tempuri.org/">
+         <getEntitiesUsingSchemaAsStringResult><![CDATA[<?xml version="1.0" encoding="utf-8"?><BizAgiWSResponse><Entities><mInstructorledHist key="51"><kmTrainingCaseAttendee entityName="mAttendee" key="9151"><dIssueDate>2023-12-05T00:00:00</dIssueDate><dExpirationDate>2025-12-05T00:00:00</dExpirationDate><sCertificateFileName>TSM55_1</sCertificateFileName><mCompaniesAttendees entityName="mCompaniesAttendees" key="4"><sName>Bizagi</sName><kpCountry entityName="Pais" key="49"><Code>CO</Code><Nombre>Colombia</Nombre></kpCountry></mCompaniesAttendees><mTrainingSessionMng entityName="mTrainingSessionMng" key="9651"><mTrainingDetails entityName="mTrainingDetails" key="8551"><sCertificateSessionName>Workshop Process Automation 2</sCertificateSessionName></mTrainingDetails></mTrainingSessionMng></kmTrainingCaseAttendee></mInstructorledHist></Entities></BizAgiWSResponse>]]></getEntitiesUsingSchemaAsStringResult>
+      </getEntitiesUsingSchemaAsStringResponse>
+   </s:Body>
+</s:Envelope>
