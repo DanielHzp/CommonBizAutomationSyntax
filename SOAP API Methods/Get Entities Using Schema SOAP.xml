@@ -11,15 +11,16 @@
          <!--Optional:-->
          <tem:entitiesInfo><![CDATA[<BizAgiWSParam>
               <EntityData>
-                  <EntityName>mTSMStudentHistory</EntityName>
+                  <EntityName>mMasterEntityName</EntityName>
                    <Filters>
-                   sCorporateEmail = 'lorenzocrey@gmail.com'
+                   sStringAtttributeName = 'me@gmail.com'
                   </Filters>
                </EntityData>
     </BizAgiWSParam>]]></tem:entitiesInfo>
          <tem:schema><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+//INSERT HERE XSD SCHEMA OF THE ENTITY
 <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="mTSMStudentHistory">
+  <xs:element name="mMasterEntityName">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" maxOccurs="1" name="kmCompany">
