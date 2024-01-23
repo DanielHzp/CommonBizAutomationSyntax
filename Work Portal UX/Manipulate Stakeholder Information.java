@@ -14,10 +14,18 @@ var idStakeholderUser = ArrayStakeholderUsers[0].getXPath("associatedUser.idUser
 
 //RETURN THE STAKEHOLDER OBJECT ACCORDING TO THE ID OF THE USER AND THE NAME OF THE STAKEHOLDER
 //Return the primary key of the stakeholder entity given a user id (associatedUser) and the stakeholder name
-var idUser= "Obtain user id from WFUSER"
+var idUser= "Obtain user id from WFUSER" 
+var idUser=Me.Case.Creator.Id;
 var idStakeholderEntity = CHelper.GetStakeholdersByUser(idUser, "StakeholderEntityName");
 
 
 //Assign the stakeholder primary key to the foreing key between a process entity and the stakeholder entity
 //Forces the system to populate my stuff collection of a given stakeholder 
+if(idStakeholderManager!=null || !CHelper.IsEmpty(idStakeholderManager)) //Validate if the user is assigned to the Stakeholder entity
+{
 <mProcessEntity.ksForeignKeyStakeholderEntity> = idStakeholderEntity;
+
+}
+
+
+
