@@ -19,6 +19,10 @@ var sDay = dDateAttributeValue.Day;
 var sMonth = dDateAttributeValue.Month;
 var sYear = dDateAttributeValue.Year;
 
+//Extract AM/PM of a date time object
+var DateValue = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>.AddHours(-5);
+var DateAM_PM = CHelper.FormatDate(DateValue, "tt");
+
 
 //Date time object to create a custom date value. Receives date time properties as parameters
 var newCustomDate = new DateTime(sYear, sMonth, sDay, sHour, sMinute, sSecond);
