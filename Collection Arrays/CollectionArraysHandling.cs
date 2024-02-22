@@ -138,6 +138,7 @@ var collectionFilteredArray = Me.getXPath("entity-list('pEntityName','sStringAtt
 var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+sStringAttributeName+"\"')"); //Filter all records where username equals ...
 var collectionFilteredArray = Me.getXPath("entity-list('pEntityName','sStringAttributeName <>\"Insert String Value Here\"')"); //Filter all records where the attribute value is different than...
 
+
 //Dynamic filter syntax entity list
 var filter="mEntityName.dDateAttributeName= "+"\""+startDateString+"\""+" and mEntityName.dDateAttributeName2= "+"\""+endDateString+"\"";
 
@@ -147,7 +148,10 @@ var filter="kpForeignKey.sStringAttribute = "+"\""+ sStringVariable+"\""+" and b
 		
 var filter="iIntegerAttribute="+ExampleArray[i]+" AND bBooleanAttribute=1";
 
+var collectionArray=Me.getXPath("entity-list('EntityName','sStringAttributeName2 =\""+sStringVariable+"\""+" and sStringAttributeName <>\"Insert String Value Here\"')");
+
 var	collectionArray = Me.getXPath("entity-list('SystemEntityName','"+filter+"')");		
+
 var collectionArray=Me.getXPath("entity-list('pParamEntityName','"+filter+"')");
 var collectionArray=Me.getXPath("entity-list('EntityName','"+filter+"')");
 
