@@ -1,0 +1,82 @@
+
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:saveEntity>
+         <!--Optional:-->
+         <tem:entityInfo>
+            <BizAgiWSParam>
+               <Entities>
+                  <mInstructorledHist key="6">
+                     <mTSMStudentHistory>3879</mTSMStudentHistory>
+                  </mInstructorledHist>
+                  <mInstructorledHist key="13">
+                     <mTSMStudentHistory>6148</mTSMStudentHistory>
+                  </mInstructorledHist>
+                  <mInstructorledHist key="14">
+                     <mTSMStudentHistory>6148</mTSMStudentHistory>
+                  </mInstructorledHist>
+                  <mInstructorledHist key="16">
+                     <mTSMStudentHistory>1373</mTSMStudentHistory>
+                  </mInstructorledHist>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+
+
+
+
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:saveEntity>
+         <!--Optional:-->
+         <tem:entityInfo>
+            <BizAgiWSParam>
+               <Entities>
+                  <mTSMStudentHistory key="54">
+                     <sFirstName>Michael</sFirstName>
+                     <sLastName>Smith 1</sLastName>
+                     <sCorporateEmail>ms1@test.com</sCorporateEmail>
+                     <sPersonalEmail>ms1@test.com</sPersonalEmail>
+                     <kmCompany>51</kmCompany>
+                  </mTSMStudentHistory>
+                  <mTSMStudentHistory key="55">
+                     <sFirstName>Michael</sFirstName>
+                     <sLastName>Smith 2</sLastName>
+                     <sCorporateEmail>ms2@test.com</sCorporateEmail>
+                     <sPersonalEmail>ms2@test.com</sPersonalEmail>
+                     <kmCompany>51</kmCompany>
+                  </mTSMStudentHistory>
+                  <mTSMStudentHistory key="61">
+                     <sFirstName>Michael</sFirstName>
+                     <sLastName>Smith 3</sLastName>
+                     <sCorporateEmail>ms3@test.com</sCorporateEmail>
+                     <sPersonalEmail>ms3@test.com</sPersonalEmail>
+                     <kmCompany>51</kmCompany>
+                  </mTSMStudentHistory>
+                  <mTSMStudentHistory key="62">
+                     <sFirstName>Michael</sFirstName>
+                     <sLastName>Smith 4</sLastName>
+                     <sCorporateEmail>ms4@test.com</sCorporateEmail>
+                     <sPersonalEmail>ms4@test.com</sPersonalEmail>
+                     <kmCompany>51</kmCompany>
+                  </mTSMStudentHistory>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soapenv:Body>
+</soapenv:Envelope>
