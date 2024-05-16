@@ -35,6 +35,9 @@ var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByC
 //Count records of a filtered collection ONLY WITH static filters
 var countRecords = <count(mProcessEntity.xCollectionName[kpForeignKeyParamEntity.iAttributeName = mProcessEntity.AttributeName])>;
 
+//Identify the maximun value of a collection integer attribute
+var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
+
 //Declare an arraylist and add items inside a business rule
 var arrayListName = new ArrayList();
 arrayListName.Add(VariableName);
