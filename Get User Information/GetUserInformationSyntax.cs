@@ -28,6 +28,9 @@ var taskDisplayName = Me.Task.DisplayName;
 
 var CaseId = CHelper.getCaseById(Me.Case.Id);
 
+
+
+
 //Obtain an array of all process active workflow elements (activites, events, etc.) in a case and iterate over all of them
 var workItemsArray = CaseInfo.getCurrentWorkItems();
 
@@ -66,8 +69,18 @@ for(var i=0;i<UsersRole.Count; i++){
 }
 
 
+
+
+
+
+
 //Validate if a specific user has certain role
 if(<mProcessEntity.kmWFUserForeingKey.Roles[roleName = 'UserRoleName']>!=null){...}
+
+
+
+
+
 
 
 //Method that obtains the size of an array containing all assignees of an active task/activity 
