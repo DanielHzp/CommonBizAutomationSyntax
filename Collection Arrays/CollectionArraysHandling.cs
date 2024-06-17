@@ -2,17 +2,30 @@
 
 //Syntax guide to obtain, loop, and manipulate collection arrays in Bizagi business rules
 
+
+
+
 //Delete all records of a collection at scope context
 Me.deleteAllCollectionItems("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName");
 
+
+
+
 //Use .context when xpath doesen´t start navigating from the process entity
 Me.Context.deleteAllCollectionItems("kmForeignKeytoEntity2.xCollectionName");
+
+
+
 
 
 //Delete one record specifically, the record that has to be deleted is identified by the primary key
 var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollectionName[iIntegerAttributeName = " + integerFilter+ "]"));
 
 Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]);
+
+
+
+
 
 //Delete repeated record in a filtered collection:
 if(ExampleArray.size()>1)
@@ -21,9 +34,14 @@ if(ExampleArray.size()>1)
 }
 
 
+
+
+
 //Validate if at least one record exists in the collection given a filtered condition
 var exists=CustomMe.getXPath("exists(xCollectionName[kpForeignKey.sStringAttribute  ='"+ sStringVariable +"'])");
 var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.sStringAttribute  ='"+sStringVariable+"'])");
+
+
 
 
 //Sum all values of a collection integer/currency attribute with custom filter
@@ -32,8 +50,14 @@ var AttributeSum= Me.getXPath("sum(mProcessEntityName.kmForeignKey.xCollectionNa
 var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depende on Me context but ONLY works with STATIC filters
 
 
+
+
 //Count records of a filtered collection ONLY WITH static filters
 var countRecords = <count(mProcessEntity.xCollectionName[kpForeignKeyParamEntity.iAttributeName = mProcessEntity.AttributeName])>;
+
+var countRecords=<count(mProcessEntity.xCollectionName[kpStatus.sCode = '5'])>;
+
+
 
 //Identify the maximun value of a collection integer attribute
 var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
@@ -41,6 +65,9 @@ var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
 //Declare an arraylist and add items inside a business rule
 var arrayListName = new ArrayList();
 arrayListName.Add(VariableName);
+
+
+
 
 
 //Obtain UNIQUE attribute records from a collection 
