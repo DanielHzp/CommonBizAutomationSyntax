@@ -35,14 +35,31 @@ var stringDate = yearDate.ToString();
 
 
 
-//Transform a date into a custom date time format value
+
+
+//Transform a date into a custom date time format value displaying date and time 
 var CustomDateFormat = CHelper.FormatDate( dDateAttributeValue, "dddd, MMMM dd, yyyy hh:mm tt"); //This function parameter receives the format standard to convert the date time value
+
+
+////Transform a date into a custom date time format value 
+var dStartDate = collectionArray.getXPath("kmMasterEntity.dStartDate");
+	
+	
+var dStartDateFormat =  CHelper.FormatDate(dStartDate, "yyyy-MM-dd"); //This function parameter receives the format standard to convert the date time value
+	
+collectionArray.setXPath("sStartDateString",dStartDateFormat); //Assign a date time value to a string attribute. Automatically converted to a string with the specified format
+	
+
+
 
 
 
 //Extract AM/PM of a date time object
 var DateValue = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>.AddHours(-5);
 var DateAM_PM = CHelper.FormatDate(DateValue, "tt");
+
+
+
 
 
 
@@ -61,8 +78,16 @@ if(CHelper.IsWorkingDay(Me,dDateAttributeValue)==true){ ... }
 
 
 
+
+
+
+
 //Add or substract hours, minutes, days, etc. to a date time value
 var dDateAttribute = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>;
+
+
+
+
 
 
 
@@ -83,9 +108,12 @@ var DateResult = dDateAttribute.AddHours(HourstoAdd); //Add hours
 
 
 
+
 //Calculate the time difference between two dates, the result is in MINUTES considering only WORKING  TIME
 var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,EndDateAttribute);
 var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,now);
+
+
 
 
 //Convert to WORKING days
@@ -93,8 +121,13 @@ var days = minutes / 480;
 var daysRoundedDown=CHelper.Math.Floor(days);
 
 
+
+
 //Convert to WORKING days
 var differenceDays = (minutes / 60) / 8;
+
+
+
 
 
 
