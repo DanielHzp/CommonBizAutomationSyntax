@@ -37,8 +37,14 @@ if(ExampleArray.size()>1)
 
 
 
-//Validate if at least one record exists in the collection given a filtered condition
+
+//Validate if at least one record exists in the collection given a filtered condition STATIC FILTERS
+var bExists=<exists(mProcessEntityName.xCollectionName[kmProdExec.bCloudActionReq = false AND kmProdExec.bExecuted != true])>;
+
+
+//Validate if at least one record exists in the collection given a filtered condition DYNAMIC FILTERS
 var exists=CustomMe.getXPath("exists(xCollectionName[kpForeignKey.sStringAttribute  ='"+ sStringVariable +"'])");
+
 var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.sStringAttribute  ='"+sStringVariable+"'])");
 
 
