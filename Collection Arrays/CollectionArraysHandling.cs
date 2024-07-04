@@ -54,7 +54,7 @@ var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.s
 var AttributeSum= Me.getXPath("sum(mProcessEntityName.kmForeignKey.xCollectionName[kpForeignKey.StringAttributeName = '"+StringVariable+"'AND kpForeignKey.kpForeignKey2.StringAttributeName = '"+StringVariable2+"' AND StringAttributeName = '"+StringVariable3+"'].cCurrencyAttribute)");
 
 var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depende on Me context but ONLY works with STATIC filters
-
+							 <sum(xCollectionName[kpRelatedAttribute != null].iIntegerAttribute)>
 
 
 
