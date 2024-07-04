@@ -2,9 +2,12 @@
 //Date handling syntax in busines rules and process expressions 
 
 
-//Obtain the exact current date
+//Obtain the exact current date with 12:00 pm as default time
 var Today=DateTime.Today;
 
+
+// Obtain the exact current date with time in hours and minutes AM/PM
+var now=DateTime.Now;
 
 
 //Obtain the creation date of a current case instance
@@ -56,7 +59,8 @@ collectionArray.setXPath("sStartDateString",dStartDateFormat); //Assign a date t
 
 //Extract AM/PM of a date time object
 var DateValue = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeName>.AddHours(-5);
-var DateAM_PM = CHelper.FormatDate(DateValue, "tt");
+
+var DateAM_PM = CHelper.FormatDate(DateValue, "tt");  //Extract AM/PM of a date time object
 
 
 
@@ -94,6 +98,7 @@ var dDateAttribute = <mProcessEntityName.kmForeingKeyToEntity2.dDateAttributeNam
 
 //Amount of hours, minutes, days to add must be declared as an integer variable
 int DaystoAdd =10;
+
 var DateResult = dDateAttribute.AddDays(DaystoAdd);//Add 
 var DateResult=dDateAttribute.AddDays(-DaystoAdd); //Substract
 
@@ -106,20 +111,18 @@ var DateResult = dDateAttribute.AddHours(HourstoAdd); //Add hours
 
 
 
-
-
-
-//Calculate the time difference between two dates, the result is in MINUTES considering only WORKING  TIME
+//Calculate the time difference between two dates, the output is in MINUTES considering only WORKING  TIME
 var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,EndDateAttribute);
 var minutes = CHelper.getEffectiveDuration(Me,StartDateAttribute,now);
 
 
+//Add or substract an input amount of minutes to a given date, the output is a datetime object based on working time schedule of a given user 
+CHelper.getSolutionDateForUser(<mProcessEntity.ksWFUSER.idUser>, dateTimeVariable, idays*8*60);
 
 
 //Convert to WORKING days
 var days = minutes / 480;
 var daysRoundedDown=CHelper.Math.Floor(days);
-
 
 
 
@@ -136,10 +139,13 @@ var differenceDays = (minutes / 60) / 8;
 var now=DateTime.Now;
 
 var dueDate=now.AddDays(32);
+
 var difTime=dueDate-now;
+
 var difTimeDays=difTime.Days;
 
 var dDateAttribute = <mProcessEntityName.dDateAttributeName>;
+
 var difTime=dDateAttribute-now;
 
 
