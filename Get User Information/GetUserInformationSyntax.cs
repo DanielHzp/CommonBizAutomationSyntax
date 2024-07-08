@@ -69,6 +69,10 @@ for(var i=0;i<UsersRole.Count; i++){
 }
 
 
+//
+var generalCounsel = Me.Case.WorkingCredential.IsInPosition("GeneralCounsel");
+
+var legalCounsel = Me.Case.WorkingCredential.IsInPosition("LegalCounsel");
 
 
 
