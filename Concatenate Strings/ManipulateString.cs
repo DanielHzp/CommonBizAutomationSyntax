@@ -24,6 +24,13 @@ var sModifiedString = ExampleArray[i].getXPath("sStringAttributeName").Replace("
 var sModifiedString = sModifiedString.Replace( StringPartToReplace, "["+sModifiedString+"]"); //Replace the specified part of the string with: [sModifiedStringValue]
 	
 
+
+//Replace spaces between characters using html space command
+sStringValue = "https://URLSample="+variable1+"+|+"+variable2+"+|+"+variable3+"";
+sStringValue = sStringValue.Replace(" ", "%20");
+
+
+
 //Simple concatenation of two string value variables
 var firstName = Array[i].getXPath("sFullName");
 var lastName = Array[i].getXPath("sLastName");
