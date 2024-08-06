@@ -4,7 +4,6 @@
 
 
 
-
 //Delete all records of a collection at scope context
 Me.deleteAllCollectionItems("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName");
 
@@ -19,19 +18,18 @@ Me.Context.deleteAllCollectionItems("kmForeignKeytoEntity2.xCollectionName");
 
 
 //Delete one record specifically, the record that has to be deleted is identified by the primary key
-var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollectionName[iIntegerAttributeName = " + integerFilter+ "]"));
+var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollectionName[iIntegerAttributeName = " + integerFilter+ "]")); //Example scope array
 
-Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]);
-
-
+Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]); //Delete the first record of the example array collection
 
 
 
 //Delete repeated record in a filtered collection:
-if(ExampleArray.size()>1)
+if(ExampleArray.size()>1) //Validates if the collection has replicated records with the specified filter condition
 {
-	Me.deleteCollectionItem("mProcessEntityName.xCollectionName",ExampleArray[0]);
+	Me.deleteCollectionItem("mProcessEntityName.xCollectionName",ExampleArray[0]); //Delete the duplicated record of the example array collection
 }
+
 
 
 
@@ -42,6 +40,10 @@ if(ExampleArray.size()>1)
 var bExists=<exists(mProcessEntityName.xCollectionName[kmProdExec.bCloudActionReq = false AND kmProdExec.bExecuted != true])>;
 
 
+
+
+
+
 //Validate if at least one record exists in the collection given a filtered condition DYNAMIC FILTERS
 var exists=CustomMe.getXPath("exists(xCollectionName[kpForeignKey.sStringAttribute  ='"+ sStringVariable +"'])");
 
@@ -50,11 +52,17 @@ var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.s
 
 
 
+
+
+
 //Sum all values of a collection integer/currency attribute with custom filter
 var AttributeSum= Me.getXPath("sum(mProcessEntityName.kmForeignKey.xCollectionName[kpForeignKey.StringAttributeName = '"+StringVariable+"'AND kpForeignKey.kpForeignKey2.StringAttributeName = '"+StringVariable2+"' AND StringAttributeName = '"+StringVariable3+"'].cCurrencyAttribute)");
 
-var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depende on Me context but ONLY works with STATIC filters
-							 <sum(xCollectionName[kpRelatedAttribute != null].iIntegerAttribute)>
+var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depend on Me context but ONLY works with STATIC filters
+							
+var AttributeSum=<sum(xCollectionName[kpRelatedAttribute != null].iIntegerAttribute)>;
+
+
 
 
 
@@ -65,8 +73,15 @@ var countRecords=<count(mProcessEntity.xCollectionName[kpStatus.sCode = '5'])>;
 
 
 
+
+
+
 //Identify the maximun value of a collection integer attribute
 var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
+
+
+
+
 
 //Declare an arraylist and add items inside a business rule
 var arrayListName = new ArrayList();
@@ -79,6 +94,17 @@ arrayListName.Add(VariableName);
 //Obtain UNIQUE attribute records from a collection 
 var DistinctRecordsArray = <distinct-values(mProcessEntityName.xCollectionName.AttributeName)>;
 var CollectionArray = CHelper.GetValueAsCollection(DistinctRecordsArray);
+
+
+
+
+
+//ATTACH NEW RECORDS TO COLLECTION1 FROM COLLECTION2 ACCORDING TO SPECIFIC CONDITION 
+	Me.attachCollectionItems("mProcessEntity.xCollectionName", Me.getXPath("mProcessEntity.xCollectionName2[kpStatus.sCode = '5']")); //xCollectionName and xCollectionName2 must be collection of the same entity
+
+
+//DETTACH EXISTING RECORDS IN COLLECTION1 ACCORDING TO CRITERIA
+	Me.detachCollectionItems("mProcessEntity.xCollectionName", Me.getXPath("mProcessEntity.xCollectionName[kpStatus.sCode = '5']"));
 
 
 
