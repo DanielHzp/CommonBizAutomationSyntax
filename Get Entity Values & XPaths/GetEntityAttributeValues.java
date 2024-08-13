@@ -13,9 +13,18 @@ var kpForeignKeyParamEntity = <mProcessEntityName.kmmMasterEntityName.kpForeignK
 
 
 
+
+
+
+
+
 //Obtain attribute value using contextualized XPath method
+
 //Me object refers to the business rule context/scope (Process or entity level)
-var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");
+var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");  //Returns the value of the attribute XPath
+
+var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the value of the attribute XPath
+
 
 //Obtain attribute value when XPath doesen´t start from process entity (always use it inside collection form rules)
 var AttributeValuetoObtain=Me.Context.getXPath("mMasterEntityName.AttributeName");
@@ -27,6 +36,13 @@ var AttributeValuetoObtain=Me.Context.getXPath("mMasterEntityName.AttributeName"
 var CustomMe=<mMasterEntityName.kmForeignEntityKey>;
 
 var AttributeValuetoObtain=CustomMe.getXPath("ForeignEntityAttributeName");
+
+
+
+
+
+
+
 
 
 //CHelper Method to obtain a SPECIFIC value of an attribute of an entity in business rules or process level expressions
@@ -49,11 +65,17 @@ var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(
 
 
 
+
+
+
 // if Conditional syntax in Bizagi    -  || ,  &&  , < , >, == , !=
 //XPath navigation depends on business rule/expression context
 if( <mProcessEntityName.kpForeignKeyParamEntity.sStringAttributeName>== 'sStringValue'){
 	
 }
+
+
+
 
 
 // If conditional syntax using ternary operators
