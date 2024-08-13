@@ -248,9 +248,16 @@ for(var i=0; i<collectionArray.size(); i++)
 //XPath navigation to obtain collection arrays----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //Obtain data from activity scope with context Me reference 
 
-var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName");
-var collectionArray = <mProcessEntityName.xCollectionName>;
-var collectionArraySize=collectionArray.size();
+var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName"); //Creates an array with one column containing iIntegerAttributeName values filtered
+
+var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>; 
+
+var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>; 
+
+var collectionArray = <mProcessEntityName.xCollectionName>; //Creates an array containing all attribute columns of the collection entity
+
+var collectionArraySize=collectionArray.size();  //Array size 
+
 var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();
 
 
