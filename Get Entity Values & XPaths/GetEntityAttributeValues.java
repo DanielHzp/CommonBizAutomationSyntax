@@ -21,9 +21,13 @@ var kpForeignKeyParamEntity = <mProcessEntityName.kmmMasterEntityName.kpForeignK
 //Obtain attribute value using contextualized XPath method
 
 //Me object refers to the business rule context/scope (Process or entity level)
-var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");  //Returns the value of the attribute XPath
+var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");  //Returns the VALUE of the attribute XPath
 
-var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the value of the attribute XPath
+
+
+sXPathVariableName="mProcessEntityName.xCollectionName[kmLCMCP = "+iIntegerVariable+" ].kpForeingKeyParamEntity.sStringVariable";
+
+var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the VALUE of the attribute XPath
 
 
 //Obtain attribute value when XPath doesen´t start from process entity (always use it inside collection form rules)
