@@ -25,7 +25,7 @@ var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");  //R
 
 
 
-sXPathVariableName="mProcessEntityName.xCollectionName[kmLCMCP = "+iIntegerVariable+" ].kpForeingKeyParamEntity.sStringVariable";
+sXPathVariableName="mProcessEntityName.xCollectionName[kmForeingKey = "+iIntegerVariable+" ].kpForeingKeyParamEntity.sStringVariable";
 
 var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the VALUE of the attribute XPath
 
