@@ -250,9 +250,17 @@ for(var i=0; i<collectionArray.size(); i++)
 
 var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName"); //Creates an array with one column containing iIntegerAttributeName values filtered
 
-var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>; 
+Me.getXPath("mONB.xCP[kpStatus.sCode = '3' AND kmCP.kpSKU.kpProductType.kpSupportType.sCode != null AND kmCP.kpSKU.kpProductType.kpSupportType.bPremium != true].kmCP
+var sTechLastName = <mONB.xOnbContacts[kpContactRole.sCode = '6'].kmPerson.sLastName>;
 
-var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>; 
+var iIdService = Me.getXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].Id");
+		CHelper.trace(traceName, "iIdService: "+iIdService);
+		Me.setXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].kpStatus",iIdStatusActive);
+		
+		
+var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>;  //Creates an array with one column containing AttributeName values filtered
+
+var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>;  //Creates an array with one column containing kmForeingKey Id values filtered
 
 var collectionArray = <mProcessEntityName.xCollectionName>; //Creates an array containing all attribute columns of the collection entity
 
