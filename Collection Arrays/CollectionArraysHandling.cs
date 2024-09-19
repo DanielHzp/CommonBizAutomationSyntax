@@ -1,23 +1,23 @@
 
 
-//Syntax guide to obtain, loop, and manipulate collection arrays in Bizagi business rules
+//SYNTAX GUIDE TO OBTAIN, LOOP, AND MANIPULATE COLLECTION ARRAYS IN BIZAGI BUSINESS RULES
 
 
 
-//Delete all records of a collection at scope context
+//DELETE ALL RECORDS OF A COLLECTION AT SCOPE CONTEXT
 Me.deleteAllCollectionItems("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName");
 
 
 
 
-//Use .context when xpath doesen´t start navigating from the process entity
+//USE .CONTEXT WHEN XPATH DOESEN´T START NAVIGATING FROM THE PROCESS ENTITY
 Me.Context.deleteAllCollectionItems("kmForeignKeytoEntity2.xCollectionName");
 
 
 
 
 
-//Delete one record specifically, the record that has to be deleted is identified by the primary key
+//DELETE ONE RECORD SPECIFICALLY, THE RECORD THAT HAS TO BE DELETED IS IDENTIFIED BY THE PRIMARY KEY
 var ExampleArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollectionName[iIntegerAttributeName = " + integerFilter+ "]")); //Example scope array
 
 Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionName",ExampleArray[0]); //Delete the first record of the example array collection
@@ -33,7 +33,7 @@ if(ExampleArray.size()>1) //Validates if the collection has replicated records w
 
 
 
-
+test sample text
 
 
 //Validate if at least one record exists in the collection given a filtered condition STATIC FILTERS
