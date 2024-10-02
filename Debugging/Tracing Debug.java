@@ -4,6 +4,14 @@
 // Trace syntax to log and debug code in business rules or process level expressions
 // CHelper class method 
 
+/*
+*	Rule Name: INSERT BUSINESS RULE NAME HERE
+*	Creator: LDEVELOPER NAME
+*	Creation Date: 30/04/2024
+*	Last Update: 30/05/2024
+*	Description: WHAT THE BUSINESS RULE INTENDS TO EXECUTE
+*/
+
 
 
 //Variable that stores an XPath, object, variable or attribute value that will be traced when the code is compiled
