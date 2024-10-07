@@ -18,23 +18,29 @@ var kpForeignKeyParamEntity = <mProcessEntityName.kmmMasterEntityName.kpForeignK
 
 
 
-//Obtain attribute value using contextualized XPath method
+//OBTAIN ATTRIBUTE VALUE USING CONTEXTUALIZED XPATH METHOD
 
 //Me object refers to the business rule context/scope (Process or entity level)
 var AttributeValuetoObtain=Me.getXPath("mProcessEntityName.AttributeName");  //Returns the VALUE of the attribute XPath
 
 
 
+
 sXPathVariableName="mProcessEntityName.xCollectionName[kmForeingKey = "+iIntegerVariable+" ].kpForeingKeyParamEntity.sStringVariable";
 
-var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the VALUE of the attribute XPath
+var AttributeValuetoObtain=Me.getXPath(sXPathVariableName);  //Returns the VALUE of the attribute XPath contained in sXPathVariableName
+
+
 
 
 //Obtain attribute value when XPath doesen´t start from process entity (always use it inside collection form rules)
 var AttributeValuetoObtain=Me.Context.getXPath("mMasterEntityName.AttributeName");
 
 
-//Obtain attribute value using contextualized XPath method
+
+
+
+//OBTAIN ATTRIBUTE VALUE USING CONTEXTUALIZED XPATH METHOD
 //CustomMe is an object (foreign or primary key) that refers to a context different than the business rule default context (Me)
 //CustomMe lets the method getXPath navigate the data model starting from the foreign entity
 var CustomMe=<mMasterEntityName.kmForeignEntityKey>;
@@ -43,14 +49,26 @@ var AttributeValuetoObtain=CustomMe.getXPath("ForeignEntityAttributeName");
 
 
 
+//
 
 
 
 
 
-
-//CHelper Method to obtain a SPECIFIC value of an attribute of an entity in business rules or process level expressions
+//CHELPER METHOD TO OBTAIN A SPECIFIC VALUE OF AN ATTRIBUTE OF AN ENTITY IN BUSINESS RULES OR PROCESS LEVEL EXPRESSIONS
 // It can fetch data from any type of entity (System, parametric or master)
+
+
+var parameters = new FilterParameters();
+parameters.AddParameter("@sName", Me.Task.DisplayName);
+parameters.AddParameter("@regionCode", <mProcessEntity.kpForeingKeyParameterEntity.Id>);
+
+var AttributeValuetoObtain=CHelper.getEntityAttrib("pEntityName","AttributeNameToObtain(ColumnName)", "sAttributeName = @sName AND bBooleanAttrib = true AND kpAttribute.sCode = @regionCode  ", parameters);
+//Filtered by attribute values (sAttributeName, bBooleanAttrib, kpAttribute.sCode ) set in AddParameter syntax
+
+
+
+//WITHOUT USING PARAMETERS SYNTAX TO ADD FILTERS:
 var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","sStringAttributeName = '" + sStringVariable + "'");
 
 //Using a constant string value in the filter
@@ -61,7 +79,7 @@ var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(
 
 var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)","bBooleanAttributeName = 1"  );
 
-//Filter with more than one attribue
+//Filter with more than one attribute
 var AttributeValuetoObtain= CHelper.getEntityAttrib("EntityName","AttributeName(ColumnName)", "iIntegerAttribute=" + iIntegerVariable + " AND bBooleanAttribute = 1 "  );
 
 //Or
