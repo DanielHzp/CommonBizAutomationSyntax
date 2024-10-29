@@ -16,6 +16,7 @@
                      <DateAttributeName>2022-05-09</DateAttributeName>
                      <IntegerAttributeName>9</IntegerAttributeName>
                      <StartDateString>09/05/2022</StartDateString>
+					 <StringAttributeName>null</StringAttributeName>     <!--Set null value-->
                   </MasterEntityName>
                </Entities>
             </BizAgiWSParam>
