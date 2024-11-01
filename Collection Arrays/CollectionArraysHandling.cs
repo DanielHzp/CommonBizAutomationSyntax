@@ -49,6 +49,8 @@ var exists=CustomMe.getXPath("exists(xCollectionName[kpForeignKey.sStringAttribu
 
 var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.sStringAttribute  ='"+sStringVariable+"'])");
 
+var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.sStringAttribute = '1'])");
+
 
 
 
