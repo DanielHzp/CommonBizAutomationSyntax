@@ -40,3 +40,10 @@ CHelper.trace("Insert file name where trace will be stored", "Sample text Variab
 var traceName = "Insert file name "+Me.Case.CaseNumber+".FileExtension";
 
 CHelper.trace(traceName, "Sample text, XPath 1 to trace: " + <MasterEntityName.kmForeingKey.Attribute> + " additional sample text XPath 2:" + <MasterEntityName.Attribute>);
+
+
+
+//TRACE EXAMPLE USING A LIBRARY RULE TO EXECUTES TRACING LOGIC 
+FamilyRuleName.Tracing(Me,"NameOfRule","Start");
+
+FamilyRuleName.Tracing(Me,"NameOfRule","sCaseNumber: "+sCaseNumber);
