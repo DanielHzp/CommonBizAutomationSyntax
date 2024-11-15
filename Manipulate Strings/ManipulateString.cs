@@ -25,13 +25,26 @@ var sModifiedString = StringValue.Trim().ToLower();
 
 
 
-//Obtain task/activity/event display name of a current process instance
+//OBTAIN TASK/ACTIVITY/EVENT DISPLAY NAME OF A CURRENT PROCESS INSTANCE
 var taskDisplayName = Me.Task.DisplayName;
 
 if (taskDisplayName == "Task Display Name ")
 {
 	StringFilterValue = "_INV_";
 }
+
+
+
+
+
+//CREATE AN ARRAY OF CHARACTERS AS A RESULT OF SPLITTING A STRING VALUE SEPARATED BY A GIVEN CHARACTER ( E.I. @)
+  var emailCharsArray=emailExtracted.split('@');
+
+			for(var j=0;j<emailCharsArray.length;j++)  //USE .LENGTH TO GET THE SIZE OF THE STRING ARRAY
+			{
+						var emailPartExtracted=emailCharsArray[j].ToString();  //EXTRACT EACH STRING PART FROM EACH ARRAY RECORD
+
+			}
 
 
 
@@ -48,7 +61,7 @@ FamilyRuleName.LibraryRuleName(Me, body , "[STRING_TAG]",<mProcessEntity.kmForei
 
 
 
-//Replace spaces between characters with html space command
+//REPLACE SPACES BETWEEN CHARACTERS WITH THE HTML SPACE COMMAND
 sStringValue = "https://URLSample="+variable1+"+|+"+variable2+"+|+"+variable3+"";
 sStringValue = sStringValue.Replace(" ", "%20");
 
