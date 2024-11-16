@@ -122,7 +122,11 @@ var collectionArraySize=collectionArray.size();
 
 //Static filter in CHelper methods
 var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[bBooleanAttributeName = true]>);
+
 var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[cCurrencyAttributeName = null OR cCurrencyAttributeName <= 0]>);
+
+var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[kmForeignKeytoEntity.bBooleanAttributeName = true]>);
+
 var collectionArraySize=collectionArray.size();
 
 
