@@ -172,12 +172,20 @@ for(var i=0; i<collectionArray.size(); i++)
 var collectionArray=CEntityManager.GetEntity("EntityName").GetEntityList("","","","");
 
 var filterString = "sStringAttributeName = 'StringSampleText' ";
-var filterBoolean="bBooleanAttributeName ="+true;
-var filterDate="dDateAttribute IS NOT NULL";
-var filterExample = "(bBooleanAttributeName <>" + true + " OR bBooleanAttributeName IS NULL) and dDateAttribute > "+ "'" + DateVariable.ToString("yyyy-MM-dd") + "'" +" and dDateAttribute2 <= " + "'" + DateVariable2.ToString("yyyy-MM-dd")+ "'";
+var filterStringConcat="sStringAttribute='"+sStringVariable+"'";
 
-var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "", filterExample, "");
+var filterBoolean="bBooleanAttributeName ="+true;
+
+var filterDate="dDateAttribute IS NOT NULL";
+
+var MultiplefiltersExample = "(bBooleanAttributeName <>" + true + " OR bBooleanAttributeName IS NULL) and dDateAttribute > "+ "'" + DateVariable.ToString("yyyy-MM-dd") + "'" +" and dDateAttribute2 <= " + "'" + DateVariable2.ToString("yyyy-MM-dd")+ "'";
+
+var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("", "", MultiplefiltersExample, "");
+
 var collectionArray = CEntityManager.GetEntity("EntityName").GetEntityList("","","iIntegerAttribute="+Array[i]+" AND bBooleanAttribute=1","");
+
+var collectionArray=CEntityManager.GetEntity("EntityName").GetEntityList("","","sStringAttribute='"+sStringVariable+"'","");
+
 var collectionArraySize=collectionArray.Length;
 
 	//Obtain primary key of i-th entity record
