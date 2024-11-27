@@ -259,19 +259,25 @@ for(var i=0; i<collectionArray.size(); i++)
 
 
 
-//XPath navigation to obtain collection arrays----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//Obtain data from activity scope with context Me reference 
+//XPATH NAVIGATION TO OBTAIN COLLECTION ARRAYS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//OBTAIN DATA FROM ACTIVITY SCOPE WITH CONTEXT ME REFERENCE 
 
 var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName"); //Creates an array with one column containing iIntegerAttributeName values filtered
 
-Me.getXPath("mONB.xCP[kpStatus.sCode = '3' AND kmCP.kpSKU.kpProductType.kpSupportType.sCode != null AND kmCP.kpSKU.kpProductType.kpSupportType.bPremium != true].kmCP
+
+//OBTAIN VALUE FROM ONE ATTRIBUTE IN PARTICULAR INSIDE A COLLECTION ARRAY
+var collectionAttributeValue=<mProcessEntityName.xCollectionName[1].AttributeName>;
+
+var idkmCP= Me.getXPath("mONB.xCP[kpStatus.sCode = '3' AND kmCP.kpSKU.kpProductType.kpSupportType.sCode != null AND kmCP.kpSKU.kpProductType.kpSupportType.bPremium != true].kmCP
+
 var sTechLastName = <mONB.xOnbContacts[kpContactRole.sCode = '6'].kmPerson.sLastName>;
 
 var iIdService = Me.getXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].Id");
-		CHelper.trace(traceName, "iIdService: "+iIdService);
-		Me.setXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].kpStatus",iIdStatusActive);
+
+Me.setXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].kpStatus",iIdStatusActive);
 		
 		
+//CREATE CUSTOM COLLECTION ARRAYS CONTAINING ONE ATTRIBUTE (ONE COLUMN)
 var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>;  //Creates an array with one column containing AttributeName values filtered
 
 var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>;  //Creates an array with one column containing kmForeingKey Id values filtered
@@ -281,6 +287,8 @@ var collectionArray = <mProcessEntityName.xCollectionName>; //Creates an array c
 var collectionArraySize=collectionArray.size();  //Array size 
 
 var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();
+
+
 
 
 
