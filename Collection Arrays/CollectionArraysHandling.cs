@@ -24,7 +24,7 @@ Me.deleteCollectionItem("mProcessEntityName.kmForeignKeytoEntity2.xCollectionNam
 
 
 
-//Delete repeated record in a filtered collection:
+//DELETE REPEATED RECORD IN A FILTERED COLLECTION:
 if(ExampleArray.size()>1) //Validates if the collection has replicated records with the specified filter condition
 {
 	Me.deleteCollectionItem("mProcessEntityName.xCollectionName",ExampleArray[0]); //Delete the duplicated record of the example array collection
@@ -33,10 +33,9 @@ if(ExampleArray.size()>1) //Validates if the collection has replicated records w
 
 
 
-test sample text
 
 
-//Validate if at least one record exists in the collection given a filtered condition STATIC FILTERS
+//VALIDATE IF AT LEAST ONE RECORD EXISTS IN THE COLLECTION GIVEN A FILTERED CONDITION STATIC FILTERS
 var bExists=<exists(mProcessEntityName.xCollectionName[kmProdExec.bCloudActionReq = false AND kmProdExec.bExecuted != true])>;
 
 
@@ -44,7 +43,7 @@ var bExists=<exists(mProcessEntityName.xCollectionName[kmProdExec.bCloudActionRe
 
 
 
-//Validate if at least one record exists in the collection given a filtered condition DYNAMIC FILTERS
+//VALIDATE IF AT LEAST ONE RECORD EXISTS IN THE COLLECTION GIVEN A FILTERED CONDITION DYNAMIC FILTERS
 var exists=CustomMe.getXPath("exists(xCollectionName[kpForeignKey.sStringAttribute  ='"+ sStringVariable +"'])");
 
 var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.sStringAttribute  ='"+sStringVariable+"'])");
@@ -57,7 +56,7 @@ var exists=Me.getXPath("exists(mProcessEntityName.xCollectionName[kpForeignKey.s
 
 
 
-//Sum all values of a collection integer/currency attribute with custom filter
+//SUM ALL VALUES OF A COLLECTION INTEGER/CURRENCY ATTRIBUTE WITH CUSTOM FILTER
 var AttributeSum= Me.getXPath("sum(mProcessEntityName.kmForeignKey.xCollectionName[kpForeignKey.StringAttributeName = '"+StringVariable+"'AND kpForeignKey.kpForeignKey2.StringAttributeName = '"+StringVariable2+"' AND StringAttributeName = '"+StringVariable3+"'].cCurrencyAttribute)");
 
 var AttributeSum=<sum(mProcessEntityName.kmForeignKey.xCollectionName[PaymentByCompany.MethodofPayment.Code = 'REI'].cCurrencyAttribute)>; //This function version doesn´t depend on Me context but ONLY works with STATIC filters
@@ -68,7 +67,7 @@ var AttributeSum=<sum(xCollectionName[kpRelatedAttribute != null].iIntegerAttrib
 
 
 
-//Count records of a filtered collection ONLY WITH static filters
+//COUNT RECORDS OF A FILTERED COLLECTION ONLY WITH STATIC FILTERS
 var countRecords = <count(mProcessEntity.xCollectionName[kpForeignKeyParamEntity.iAttributeName = mProcessEntity.AttributeName])>;
 
 var countRecords=<count(mProcessEntity.xCollectionName[kpStatus.sCode = '5'])>;
@@ -78,14 +77,14 @@ var countRecords=<count(mProcessEntity.xCollectionName[kpStatus.sCode = '5'])>;
 
 
 
-//Identify the maximun value of a collection integer attribute
+//IDENTIFY THE MAXIMUN VALUE OF A COLLECTION INTEGER ATTRIBUTE
 var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
 
 
 
 
 
-//Declare an arraylist and add items inside a business rule
+//DECLARE AN ARRAYLIST AND ADD ITEMS INSIDE A BUSINESS RULE
 var arrayListName = new ArrayList();
 arrayListName.Add(VariableName);
 
@@ -93,7 +92,7 @@ arrayListName.Add(VariableName);
 
 
 
-//Obtain UNIQUE attribute records from a collection 
+//OBTAIN UNIQUE ATTRIBUTE RECORDS FROM A COLLECTION 
 var DistinctRecordsArray = <distinct-values(mProcessEntityName.xCollectionName.AttributeName)>;
 var CollectionArray = CHelper.GetValueAsCollection(DistinctRecordsArray);
 
@@ -114,13 +113,13 @@ var CollectionArray = CHelper.GetValueAsCollection(DistinctRecordsArray);
 
 
 
-//CHelper methods to create collection arrays ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//Obtain data from activity scope
+//CHELPER METHODS TO CREATE COLLECTION ARRAYS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//OBTAIN DATA FROM ACTIVITY SCOPE
 var collectionArray=CHelper.GetValueAsCollection(<mProcessEntityName.kmForeignKeytoEntity2.xCollectionName>);  
 var collectionArraySize=collectionArray.size();
 
 
-//Static filter in CHelper methods
+//STATIC FILTER IN CHELPER METHODS
 var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[bBooleanAttributeName = true]>);
 
 var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName[cCurrencyAttributeName = null OR cCurrencyAttributeName <= 0]>);
@@ -130,7 +129,7 @@ var collectionArray = CHelper.GetValueAsCollection(<mProcessEntityName.xCollecti
 var collectionArraySize=collectionArray.size();
 
 
-//DYNAMIC filter in CHelper methods
+//DYNAMIC FILTER IN CHELPER METHODS
 var collectionArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollection1Name[bBooleanAttribute = true].xCollection2Name[kmForeignKeytoEntity.integerAttrib = "+integerVariable+" AND kpForeignKeyParamEntity.integerAttrib = 2 ]"));
 
 var collectionArray = CHelper.GetValueAsCollection(Me.getXPath("mProcessEntityName.xCollection1Name[bBooleanAttribute = true].xCollection2Name[integerAttrib = "+integerVariable+" AND kpForeignKeyParamEntity.integerAttrib = 2 ]"));
@@ -166,9 +165,9 @@ for(var i=0; i<collectionArray.size(); i++)
 
 
 
-//CEntityManager methods to create collection arrays (from parameter ,master and system WF entities)-------------------------------------------------------------------------------------------------------------------------------
-//Obtain data from DATABASE without context reference  (They compile in global rules or start events )
-//CEntityManager get Entity method can only be filtered by attributes directly related to the searched entity,  attributes in related/connected entities can´t be navigated
+//CENTITYMANAGER METHODS TO CREATE COLLECTION ARRAYS (FROM PARAMETER ,MASTER AND SYSTEM WF ENTITIES)-------------------------------------------------------------------------------------------------------------------------------
+//OBTAIN DATA FROM DATABASE WITHOUT CONTEXT REFERENCE  (THEY COMPILE IN GLOBAL RULES OR START EVENTS )
+//CENTITYMANAGER GET ENTITY METHOD CAN ONLY BE FILTERED BY ATTRIBUTES DIRECTLY RELATED TO THE SEARCHED ENTITY,  ATTRIBUTES IN RELATED/CONNECTED ENTITIES CAN´T BE NAVIGATED
 var collectionArray=CEntityManager.GetEntity("EntityName").GetEntityList("","","","");
 
 var filterString = "sStringAttributeName = 'StringSampleText' ";
@@ -205,18 +204,18 @@ var collectionArraySize=collectionArray.Length;
 
 
 
-//Me Entity list methods to create collection arrays (from parameter ,master and system WF entities)---------------------------------------------------------------------------------------------------------------------------------
-//Obtain data from database with context Me reference (They don´t compile in global rules or start events )
+//ME ENTITY LIST METHODS TO CREATE COLLECTION ARRAYS (FROM PARAMETER ,MASTER AND SYSTEM WF ENTITIES)---------------------------------------------------------------------------------------------------------------------------------
+//OBTAIN DATA FROM DATABASE WITH CONTEXT ME REFERENCE (THEY DON´T COMPILE IN GLOBAL RULES OR START EVENTS )
 var collectionArray= Me.getXPath("entity-list('EntityName','')");
 
 
-//Static filter syntax entity list
+//STATIC FILTER SYNTAX ENTITY LIST
 var collectionFilteredArray = Me.getXPath("entity-list('pEntityName','sStringAttributeName =\"UK\"')");
 var collectionFilteredArray = Me.getXPath("entity-list('Wfuser','username =\""+sStringAttributeName+"\"')"); //Filter all records where username equals ...
 var collectionFilteredArray = Me.getXPath("entity-list('pEntityName','sStringAttributeName <>\"Insert String Value Here\"')"); //Filter all records where the attribute value is different than...
 
 
-//Dynamic filter syntax entity list
+//DYNAMIC FILTER SYNTAX ENTITY LIST
 var filter="mEntityName.dDateAttributeName= "+"\""+startDateString+"\""+" and mEntityName.dDateAttributeName2= "+"\""+endDateString+"\"";
 
 var filter="mEntityName.dDateAttributeName= "+"\""+startDateString+"\""+" and mEntityName.dDateAttributeName2= "+"\""+endDateString+"\""+" and kpForeignKey.sStringAttribute= "+"\""+StringVariable+"\""+" and mEntityName.sStringAttribute= "+"\""+StringVariable+"\"";
@@ -225,24 +224,26 @@ var filter="kpForeignKey.sStringAttribute = "+"\""+ sStringVariable+"\""+" and b
 		
 var filter="iIntegerAttribute="+ExampleArray[i]+" AND bBooleanAttribute=1";
 
+
 var collectionArray=Me.getXPath("entity-list('EntityName','sStringAttributeName2 =\""+sStringVariable+"\""+" and sStringAttributeName <>\"Insert String Value Here\"')");
 
-var	collectionArray = Me.getXPath("entity-list('SystemEntityName','"+filter+"')");		
+var collectionArray = Me.getXPath("entity-list('SystemEntityName','"+filter+"')");		
 
 var collectionArray=Me.getXPath("entity-list('pParamEntityName','"+filter+"')");
 var collectionArray=Me.getXPath("entity-list('EntityName','"+filter+"')");
 
-//Me Entity list  array navigation for-loop syntax:
+//ME ENTITY LIST  ARRAY NAVIGATION FOR-LOOP SYNTAX:
 for(var i=0; i<collectionArray.size(); i++)
 {
-	//Obtain primary key of i-th entity record
+	//OBTAIN PRIMARY KEY OF I-TH ENTITY RECORD
 	var primaryKeyRecord-ith = Me.getXPath("entity-list('EntityName')")[i];
 	
 	var  primaryKeyRecord-ith = collectionArray[i];
 	
 	var  primaryKeyRecord-ith =collectionArray.get(i);
 	
-	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("Id"); //Obtain the NUMERIC value of the primary key of the i-th entity record
+	//OBTAIN THE NUMERIC VALUE OF THE PRIMARY KEY OF THE I-TH ENTITY RECORD
+	var primaryKeyRecord-ith=collectionArray.get(i).getXPath("Id"); //OBTAIN THE NUMERIC VALUE OF THE PRIMARY KEY OF THE I-TH ENTITY RECORD
 	
 	//Obtain attribute of i-th entity record 
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
@@ -260,13 +261,14 @@ for(var i=0; i<collectionArray.size(); i++)
 
 
 //XPATH NAVIGATION TO OBTAIN COLLECTION ARRAYS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//OBTAIN DATA FROM ACTIVITY SCOPE WITH CONTEXT ME REFERENCE 
 
+//OBTAIN DATA FROM ACTIVITY SCOPE WITH CONTEXT ME REFERENCE 
 var collectionArray =Me.getXPath("mProcessEntityName.kmForeignKey.xCollectionName[RequestedItem.ItemIndex = "+index+" ].iIntegerAttributeName"); //Creates an array with one column containing iIntegerAttributeName values filtered
 
 
+
 //OBTAIN VALUE FROM ONE ATTRIBUTE IN PARTICULAR INSIDE A COLLECTION ARRAY
-var collectionAttributeValue=<mProcessEntityName.xCollectionName[1].AttributeName>;
+var collectionAttributeValue=<mProcessEntityName.xCollectionName[1].AttributeName>;  //INDEX START IN 1 USING THIS SYNTAX
 
 var idkmCP= Me.getXPath("mONB.xCP[kpStatus.sCode = '3' AND kmCP.kpSKU.kpProductType.kpSupportType.sCode != null AND kmCP.kpSKU.kpProductType.kpSupportType.bPremium != true].kmCP
 
@@ -277,46 +279,57 @@ var iIdService = Me.getXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdC
 Me.setXPath("mONB.kmCustomer.xCustomerServices[kmCP.Id = "+iIdCP+"].kpStatus",iIdStatusActive);
 		
 		
+		
+		
 //CREATE CUSTOM COLLECTION ARRAYS CONTAINING ONE ATTRIBUTE (ONE COLUMN)
-var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>;  //Creates an array with one column containing AttributeName values filtered
 
-var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>;  //Creates an array with one column containing kmForeingKey Id values filtered
+//CREATES AN ARRAY WITH ONE COLUMN CONTAINING ATTRIBUTENAME VALUES FILTERED
+var collectionArray=<mProcessEntityName.xCollectionName[...].AttributeName>;  
 
-var collectionArray = <mProcessEntityName.xCollectionName>; //Creates an array containing all attribute columns of the collection entity
+ //CREATES AN ARRAY WITH ONE COLUMN CONTAINING KMFOREINGKEY ID VALUES FILTERED
+var collectionArray=<mProcessEntityName.xCollectionName[...].kmForeingKey.Id>; 
+
+//CREATES AN ARRAY CONTAINING ALL ATTRIBUTE COLUMNS OF THE COLLECTION ENTITY
+var collectionArray = <mProcessEntityName.xCollectionName>; 
 
 var collectionArraySize=collectionArray.size();  //Array size 
 
-var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();
+var collectionArraySize=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size(); //Array size
 
 
 
 
 
-//XPath collection navigation for-loop syntax:
+//XPATH COLLECTION NAVIGATION FOR-LOOP SYNTAX:
 for(var i=0; i<collectionArray.size(); i++)  //Or
 for(var i=0;i< <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();i++)
 {
-	//Obtain primary key of i-th entity record
-	var primaryKeyRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i];
+	//OBTAIN PRIMARY KEY OF I-TH ENTITY RECORD
+	var primaryKeyRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i];  //INDEX i STARTS IN 0 USING THIS SYNTAX
 	
 	var primaryKeyRecord-ith=collectionArray[i].getXPath("Id"); //Obtain the NUMERIC value of the primary key of the i-th entity record
 	
 	
-	//Obtain attribute of i-th entity record 
+	//OBTAIN ATTRIBUTE OF I-TH ENTITY RECORD 
 	var attributeValueRecord-ith=collectionArray[i].getXPath("AttributeName");
 	
-	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("AttributeName");
+	var attributeValueRecord-ith = <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("AttributeName");  //INDEX i STARTS IN 0 USING THIS SYNTAX
 	
 	if(CHelper.IsNull(attributeValueRecord-ith)){ ... }
 	
-	//Obtain data from activity scope with CustomMeExample reference
+	
+	
+	//OBTAIN DATA FROM ACTIVITY SCOPE WITH CUSTOMMEEXAMPLE REFERENCE
 	var collectionArrayRecord-ith = collectionArray[i].getXPath("xCollectionNameofRecord-ith");
 	
 	var collectionArrayRecord-ith=<mProcessEntityName.kmForeignKeyEntity2.xCollectionName>[i].getXPath("xCollectionNameofRecord-ith");
 	
 	var collectionFilteredArrayRecord-ith =CustomMe.getXPath("xCollectionNameofRecord-ith[kpForeignKey.sStringAttribute ='"+ StringVariable +"'])"); //CustomMe refers to collectionArray[i] object
 	
+	
 	var newRecord= CustomMe.newCollectionItem("xCollectionNameofRecord-ith");
+	
+
 	newRecord.setXPath("BuildingC",attendees[i].getXPath("SelectedWorkshop[Selected = true AND Workshop.WorkshopType.Code = "+codigo+"].BuildingConectorsPre").toString()+"%")
 }
 	
@@ -326,24 +339,26 @@ for(var i=0;i< <mProcessEntityName.kmForeignKeyEntity2.xCollectionName>.size();i
 
 
 
-//CHelper method to obtain and manipulate user properties arrays (user roles, skills, etc.)----------------------------------------------------------------------------------------------------------------------------------------------------------
-//Obtain all users with certain role:
+//CHELPER METHOD TO OBTAIN AND MANIPULATE USER PROPERTIES ARRAYS (USER ROLES, SKILLS, ETC.)----------------------------------------------------------------------------------------------------------------------------------------------------------
+//OBTAIN ALL USERS WITH CERTAIN ROLE:
 var UsersRoleArray=CHelper.getUsersForRole("UserRoleName");
 var UsersPositionArray=CHelper.getUsersForPosition("UserPositionName");
 
 for(var i=0;i<UsersRole.Count; i++){
 	
-	//Obtain primary key (WF user id) of i-th record 
+	//OBTAIN PRIMARY KEY (WF USER ID) OF I-TH RECORD 
 	var userId=UsersRoleArray[i];
 	
 }
 
 
-//Validate if a specific user has certain role
+//VALIDATE IF A SPECIFIC USER HAS CERTAIN ROLE
 if(<mProcessEntity.kmWFUserForeingKey.Roles[roleName = 'UserRoleName']>!=null){...}
 
 
-//Method that obtains the size of an array containing all assignees of an active task/activity 
+
+
+//METHOD THAT OBTAINS THE SIZE OF AN ARRAY CONTAINING ALL ASSIGNEES OF AN ACTIVE TASK/ACTIVITY 
 
 var CountUsersAssigned=Me.Assignees.Count;
 
