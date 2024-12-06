@@ -48,8 +48,8 @@ CustomMeExample.setXPath("EntityCollection2AttributeName",sValuetoAssign);
 CustomMeExample.setXPath("EntityCollection2ForeignKey",ExampleArray[i].getXPath("Id"));
 
 
-//Assign a value to an attribute of collection entity 2 which is INSIDE  collection entity 1 (i is an index inside a for-loop)
-//Option 2 (mEntityName --> xEntityCollection1 --> xEntityCollection2)
+//ASSIGN A VALUE TO AN ATTRIBUTE OF COLLECTION ENTITY 2 WHICH IS INSIDE  COLLECTION ENTITY 1 (I IS AN INDEX INSIDE A FOR-LOOP)
+//OPTION 2 (MENTITYNAME --> XENTITYCOLLECTION1 --> XENTITYCOLLECTION2)
 var CustomMeExample2=Me.newCollectionItem("mEntityName.xEntityCollection1Name");
 
 var CustomMeExample3=CustomMeExample2.newCollectionItem("xEntityCollection2");
@@ -60,8 +60,8 @@ var CustomMeExample3=CustomMeExample2.newCollectionItem("xEntityCollection2");
 
 
 
-//Overwrite an existing attribute value of a collection record
-//CustomMe as a reference of a Bizagi array example, here we need to set an attribute value of a specific record in an array:
+//OVERWRITE AN EXISTING ATTRIBUTE VALUE OF A COLLECTION RECORD
+//CUSTOMME AS A REFERENCE OF A BIZAGI ARRAY EXAMPLE, HERE WE NEED TO SET AN ATTRIBUTE VALUE OF A SPECIFIC RECORD IN AN ARRAY:
 var ExampleScopeArray= CHelper.GetValueAsCollection(<mProcessEntityName.xCollectionName>);
 var valueToAssign=items[i].getXPath("AttributeName");
 
@@ -71,7 +71,7 @@ ExampleScopeArray[i].setXPath("EntityCollectionAttributeName", valueToAssign);
 
 
 
-//Alternate way to overwrite an existing attribute value of a collection record 
+//ALTERNATE WAY TO OVERWRITE AN EXISTING ATTRIBUTE VALUE OF A COLLECTION RECORD 
 Me.setXPath("mEntityName.xEntityCollectionName["+i+"].EntityCollectionAttributeName", <mEntityName.AttributeName>);
 
 
@@ -82,8 +82,8 @@ Me.setXPath("mEntityName.xEntityCollectionName["+i+"].EntityCollectionAttributeN
 
 
 
-//Overwrite a specific record in mEntity, the record is searched using the primary key as a parameter
-//The attribute value is forced to PERSIST in the database
+//OVERWRITE A SPECIFIC RECORD IN AN ENTITY, THE RECORD IS SEARCHED USING THE PRIMARY KEY AS A PARAMETER
+//THE ATTRIBUTE VALUE IS FORCED TO PERSIST IN THE DATABASE
 var  mEntityPrimaryKey=mEntityArray.get(0).getXPath("idmEntityName");
 
 CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,valueToAssign);
@@ -92,23 +92,27 @@ CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,null);
 
 
 
+//UPDATE/OVERWRITE AN ATTRIBUTE VALUE IN THE SCOPE OF A TASK AND DATABASE OF THE APP
+
+<mEntityName.attributeName>=valueToAssign;  //PERSIST DATA IN SCOPE OF A TASK
+
+CHelper.setAttrib("mEntityName", mEntityPrimaryKey ,"attributeName" ,valueToAssign); //PERSIST DATA IN DATABASE
 
 
 
 
 
-
-//Obtain and save the PRIMARY KEY of a process/transactional master entity
+//OBTAIN AND SAVE THE PRIMARY KEY OF A PROCESS/TRANSACTIONAL MASTER ENTITY
 var processEntityPrimaryKeyd=<mEntityName>;    //Primary key of the case
 
 
 
 
-//Clean data value of  a master entity attribute
+//CLEAN DATA VALUE OF  A MASTER ENTITY ATTRIBUTE
 <mEntity1Name.kmForeingKeyEntity2.kmForeingKeyEntity3.attributeNameinEntity3> = null;
 
 
-//Cleans an attribute value of ALL RECORDS of a filtered collection  (two nested collections sample)
+//CLEANS AN ATTRIBUTE VALUE OF ALL RECORDS OF A FILTERED COLLECTION  (TWO NESTED COLLECTIONS SAMPLE)
 <mEntity1Name.xCollection1Name[bBooleanAttribute1 = true AND bBooleanAttribute2 = true].xCollection2Name[bBooleanAttribute3 == false].attributeToCleanName> = null;
 
 <mEntity1Name.xCollection1Name[bBooleanAttribute1 = true AND bBooleanAttribute2 = true AND bBooleanAttribute3 != true].attributeToCleanName> = null;
