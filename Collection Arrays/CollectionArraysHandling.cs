@@ -78,7 +78,11 @@ var countRecords=<count(mProcessEntity.xCollectionName[kpStatus.sCode = '5'])>;
 
 
 //IDENTIFY THE MAXIMUN VALUE OF A COLLECTION INTEGER ATTRIBUTE
-var maxValue= <max(CmProcessEntity.xCollectionName.iIntegerAttribute)>;
+var maxValue= <max(mProcessEntity.xCollectionName.iIntegerAttribute)>;
+
+var zero=0;
+
+var maxValue=CHelper.Math.Max([<max(mProcessEntity.xCollectionName.iIntegerAttribute)>, zero]);
 
 
 
