@@ -108,6 +108,33 @@ var CollectionArray = CHelper.GetValueAsCollection(DistinctRecordsArray);
 	Me.attachCollectionItems("mProcessEntity.xCollection1Name", Me.getXPath("mProcessEntity.xCollectionName2[kpStatus.sCode = '5']")); //xCollectionName and xCollectionName2 must be collections of the same entity
 
 
+
+//ATTACH RECORDS TO COLLECTION1 FROM COLLECTION2 USING A FOR LOOP
+
+var collection2Array=CHelper.GetValueAsCollection(<mProcessEntity.xCollection2>);
+
+
+			for(var k=0;k<collection2Array.size();k++)
+			{
+					var oCollectionRecord=collection2Array.get(k);
+
+					Me.attachCollectionItem("mProcessEntity.xCollection1", oCollectionRecord);
+
+					var oNestedCollection=oCollectionRecord.getXPath("xNestedCollection");  //ATTACH RECORDS TO COLLECTION1 FROM A COLLECTION INSIDE COLLECTION2
+
+
+							for(var c=0;c<oNestedCollection.size();c++)
+							{
+
+									var oCollectionRecord=oNestedCollection.get(c);
+
+									Me.attachCollectionItem("mProcessEntity.xCollectionNth", oCollectionRecord);
+
+							}
+
+
+
+
 //DETTACH EXISTING RECORDS IN COLLECTION1 ACCORDING TO CRITERIA
 	Me.detachCollectionItems("mProcessEntity.xCollection1Name", Me.getXPath("mProcessEntity.xCollectionName[kpStatus.sCode = '5']"));
 	
