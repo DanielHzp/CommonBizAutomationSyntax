@@ -1,0 +1,49 @@
+
+
+<!--LEGACY SECURITY  IN THE ENVIRONMENT MUST BE TURNED OFF WHEN EXECUTING A SOAP WEB SERVICE METHOD USING THIS SYNTAX-->
+
+<!--SAVE ENTITY SOAP  METHOD THAT CREATES NEW RECORDS IN A DATABASE ENTITY-->
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:saveEntity>
+         <!--Optional:-->
+         <tem:entityInfo>
+            <BizAgiWSParam>
+               <Entities>
+                  <mEntityName>
+                     <kpForeignKeyAttribute>2</kpForeignKeyAttribute>
+                     <kpForeignKeyAttribute>4</kpForeignKeyAttribute>
+                     <sCode>SC_009</sCode>
+                     <sName>Insert sName value here without quotations</sName>
+                     <sDescription>Insert description here without quotes</sDescription>
+                  </mEntityName>
+                  <mEntityName>
+                     <kpForeignKeyAttribute>2</kpForeignKeyAttribute>
+                     <kpForeignKeyAttribute>4</kpForeignKeyAttribute>
+                     <sCode>SC_010</sCode>
+                     <sName>Insert sName value here without quotations</sName>
+                     <sDescription>Insert description here without quotes</sDescription>
+                  </mEntityName>
+                  <mEntityName>
+                     <kpForeignKeyAttribute>2</kpForeignKeyAttribute>
+                     <kpForeignKeyAttribute>1</kpForeignKeyAttribute>
+                     <sCode>SC_011</sCode>
+                     <sName>Insert sName value here without quotations</sName>
+                     <sDescription>Insert description here without quotes.</sDescription>
+                  </mEntityName>
+                  <mEntityName>
+                     <kpForeignKeyAttribute>2</kpForeignKeyAttribute>
+                     <kpForeignKeyAttribute>4</kpForeignKeyAttribute>
+                     <sCode>SC_012</sCode>
+                     <sName>Insert sName value here without quotations</sName>
+                     <sDescription>Insert description here without quotes</sDescription>
+                  </mEntityName>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soapenv:Body>
+</soapenv:Envelope>
