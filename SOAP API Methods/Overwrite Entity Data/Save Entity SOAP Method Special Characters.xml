@@ -1,0 +1,18 @@
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:saveEntity>
+         <!--MAKE THE CHARACTER '&' COMPATIBLE IN XML SCRIPTS-->
+         <tem:entityInfo>
+           <BizAgiWSParam>
+               <Entities>
+                  <mEntityName key="123456789">
+                     <sStringAttribute>Insert text here before special character  &#38;  insert the rest of the text here</sStringAttribute>
+                  </mEntityName>
+               </Entities>
+            </BizAgiWSParam>
+         </tem:entityInfo>
+      </tem:saveEntity>
+   </soapenv:Body>
+</soapenv:Envelope>
